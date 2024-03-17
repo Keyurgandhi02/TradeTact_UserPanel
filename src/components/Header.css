@@ -1,6 +1,6 @@
 a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
 }
 .site-header {
   padding: 0.5em 1em;
@@ -26,9 +26,10 @@ a {
 }
 
 header {
-  background-color: #333;
-  color: white;
+  background-color: #fff;
+  color: #5bb462;
   padding: 10px 20px;
+  border-bottom: 1px solid black;
 }
 
 nav ul {
@@ -43,7 +44,7 @@ nav ul li {
 }
 
 nav ul li a {
-  color: white;
+  color: black;
   text-decoration: none;
 }
 

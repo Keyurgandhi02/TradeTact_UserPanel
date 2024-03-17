@@ -1,4 +1,3 @@
-// Header.js
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
@@ -11,19 +10,19 @@ const Header = () => {
       <nav className="site-navigation">
         <ul className="nav">
           <li>
-            <Link to="/">Queue Stocks</Link>
-          </li>
-          <li>
-            <Link to="/add-journal">Add Journal</Link>
-          </li>
-          <li>
-            <Link to="/journal-list">Journal List</Link>
+            <Link to="/">Queue</Link>
           </li>
           <li>
             <Link to="/risk-management">RM</Link>
           </li>
           <li>
             <Link to="/rm-list">RM List</Link>
+          </li>
+          <li>
+            <Link to="/add-journal">Add Journal</Link>
+          </li>
+          <li>
+            <Link to="/journal-list">Journal List</Link>
           </li>
         </ul>
       </nav>

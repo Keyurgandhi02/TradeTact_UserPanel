@@ -3,15 +3,25 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase-config";
 import "./AddJournalForm.css";
 import GlobalInput from "./GlobalInput";
+import { CompactTable } from "@table-library/react-table-library/compact";
+import { useTheme } from "@table-library/react-table-library/theme";
+import {
+  DEFAULT_OPTIONS,
+  getTheme,
+} from "@table-library/react-table-library/mantine";
 
 function QueueStocks() {
   const initialState = {
     scriptName: "",
     stockPrice: "",
+    strategyName: "",
   };
 
   const [formData, setFormData] = useState(initialState);
-  const [fetchedData, setFetchedData] = useState([]);
+  const [nodes, setFetchedData] = useState([]);
+
+  const mantineTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(mantineTheme);
 
   const handleChange = (name, value) => {
     setFormData({
@@ -47,6 +57,23 @@ function QueueStocks() {
     setFetchedData(dataArray);
   };
 
+  const COLUMNS = [
+    {
+      label: "Script Name",
+      renderCell: (item) => item.scriptName,
+    },
+    {
+      label: "Strategy Name",
+      renderCell: (item) => item.strategyName,
+    },
+    {
+      label: "Stock Price",
+      renderCell: (item) => item.stockPrice,
+    },
+  ];
+
+  const data = { nodes };
+
   return (
     <>
       <div className="container">
@@ -61,6 +88,14 @@ function QueueStocks() {
               onChangeHandler={(name, value) => handleChange(name, value)}
             />
             <GlobalInput
+              inputType="text"
+              placeholder="Strategy Name"
+              isValue={formData?.strategyName}
+              onChangeHandler={(name, value) => handleChange(name, value)}
+              name="strategyName"
+            />
+
+            <GlobalInput
               inputType="number"
               placeholder="Stock Price"
               isValue={formData?.stockPrice}
@@ -72,23 +107,7 @@ function QueueStocks() {
         </form>
       </div>
 
-      <div>
-        {fetchedData.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              border: "1px solid black",
-              width: "150px",
-              height: "120px",
-              padding: "20px",
-            }}
-          >
-            <h3>Trade : {index + 1}</h3>
-            <h4>{item?.scriptName}</h4>
-            <h4>{item?.stockPrice}</h4>
-          </div>
-        ))}
-      </div>
+      {data && <CompactTable columns={COLUMNS} data={data} theme={theme} />}
     </>
   );
 }
