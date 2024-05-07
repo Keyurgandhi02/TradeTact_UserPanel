@@ -6,7 +6,8 @@ function GlobalInput({
   isValue,
   onChangeHandler,
   name,
-  className
+  className,
+  disabledStatus,
 }) {
   const handleChange = (e) => {
     onChangeHandler(name, e.target.value);
@@ -20,6 +21,7 @@ function GlobalInput({
       value={isValue}
       name={name}
       onChange={handleChange}
+      disabled={disabledStatus}
     />
   );
 }
