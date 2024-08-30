@@ -1,0 +1,184 @@
+export const tradeJournalValidationRules = {
+  scriptName: {
+    required: true,
+    message: "Script Name is required",
+  },
+  buyDate: {
+    required: true,
+    message: "Date is required",
+  },
+  strategyName: {
+    required: true,
+    message: "Strategy Name is required",
+  },
+  entryPrice: {
+    required: true,
+    type: "number",
+    message: "Entry Price is required",
+  },
+  slPrice: {
+    required: true,
+    type: "number",
+    message: "Stop Loss is required",
+  },
+  targetPrice: {
+    required: true,
+    type: "number",
+    message: "Target Price is required",
+  },
+  exitPrice: {
+    required: true,
+    type: "number",
+    message: "Exit Price is required",
+  },
+  quantity: {
+    required: true,
+    type: "number",
+    message: "Qty is required",
+  },
+  profitLossPrice: {
+    required: true,
+    type: "number",
+    message: "Profit/Loss is required",
+  },
+  emotionsWhenEnter: {
+    required: true,
+    message: "Entry Emotion is required",
+  },
+  emotionsWhenExit: {
+    required: true,
+    message: "Exit Emotion is required",
+  },
+  broker: {
+    required: true,
+    message: "Broker is required",
+  },
+  dematUser: {
+    required: true,
+    message: "Demat Account is required",
+  },
+  trade_type: {
+    required: true,
+    message: "Trade Type is required",
+  },
+  rating: {
+    required: true,
+    type: "number",
+    message: "Rating is required",
+  },
+  learning: {
+    required: false,
+    message: "Learning is required",
+  },
+  mistake: {
+    required: false,
+    message: "Mistake is required",
+  },
+};
+
+export const watchlistValidationRules = {
+  created_at: {
+    required: true,
+    message: "Date is required",
+  },
+  scriptName: {
+    required: true,
+    message: "Script Name is required",
+  },
+  strategyName: {
+    required: true,
+    message: "Strategy Name is required",
+  },
+  stockPrice: {
+    required: true,
+    type: "number",
+    message: "Stock Price is required",
+  },
+  status: {
+    required: true,
+    message: "Status is required",
+  },
+};
+
+export const roiValidationRules = {
+  created_at: {
+    required: true,
+    message: "Date is required",
+  },
+  accountName: {
+    required: true,
+    message: "Account Name is required",
+  },
+  invested_amount: {
+    required: true,
+    type: "number",
+    message: "Invested Amount is required",
+  },
+  returned_amount: {
+    required: true,
+    type: "number",
+    message: "Return Amount is required",
+  },
+  charges: {
+    required: true,
+    type: "number",
+    message: "Charges is required",
+  },
+};
+
+export const strategyValidationRules = {
+  label: {
+    required: true,
+    message: "Strategy is required",
+  },
+};
+
+export const dematAccountValidationRules = {
+  label: {
+    required: true,
+    message: "Demat Account is required",
+  },
+};
+
+export const brokerAccountValidationRules = {
+  label: {
+    required: true,
+    message: "Broker is required",
+  },
+};
+
+export const loginValidationRules = {
+  email: {
+    required: true,
+    message: "Please enter a valid email address.",
+    type: "email",
+  },
+  password: {
+    required: true,
+    minLength: 6,
+    message: "Password is required and must be at least 6 characters long",
+  },
+};
+
+export const signupValidationRules = {
+  ...loginValidationRules,
+  name: {
+    required: true,
+    message: "Name is required.",
+  },
+  mobile: {
+    required: true,
+    minLength: 10,
+    maxLength: 10,
+    type: "number",
+    message: "Mobile Number is Required",
+  },
+};
+
+export const resetPasswordValidationRules = {
+  email: {
+    required: true,
+    message: "Please enter a valid email address.",
+    type: "email",
+  },
+};

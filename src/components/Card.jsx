@@ -1,23 +1,23 @@
 import React from "react";
 
-function Card() {
+function Card({ icon, value, heading, onClickHandler }) {
   return (
-    <div class="card">
-      <div class="card-header p-3 pt-2">
-        <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-          <i class="material-icons opacity-10">weekend</i>
-        </div>
-        <div class="text-end pt-1">
-          <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-          <h4 class="mb-0">$53k</h4>
-        </div>
+    <div
+      className={`rounded-xl p-6 bg-black-dark-200 ${
+        onClickHandler ? "cursor-pointer" : "cursor-default"
+      }`}
+      onClick={onClickHandler}
+    >
+      <div>
+        <h5 className="text-primary-500 text-md font-semibold leading-none">
+          {heading}
+        </h5>
       </div>
-      <hr class="dark horizontal my-0" />
-      <div class="card-footer p-3">
-        <p class="mb-0">
-          <span class="text-success text-sm font-weight-bolder">+55% </span>
-          than last week
-        </p>
+      <div className="flex items-center mt-6">
+        <div className="text-2xl text-whiten font-bold ">{value}</div>
+        <div className="rounded-full  text-whiten w-8 h-8 flex ml-auto transition duration-300">
+          {icon}
+        </div>
       </div>
     </div>
   );

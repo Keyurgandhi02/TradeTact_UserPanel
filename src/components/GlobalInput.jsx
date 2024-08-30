@@ -2,27 +2,32 @@ import React from "react";
 
 function GlobalInput({
   inputType,
-  placeholder,
   isValue,
   onChangeHandler,
   name,
-  className,
+  placeholder,
   disabledStatus,
+  errors,
 }) {
   const handleChange = (e) => {
     onChangeHandler(name, e.target.value);
   };
 
   return (
-    <input
-      className={className}
-      type={inputType}
-      placeholder={placeholder}
-      value={isValue}
-      name={name}
-      onChange={handleChange}
-      disabled={disabledStatus}
-    />
+    <div class="mb-4.5 text-whiten">
+      <label class="mb-3 block text-sm font-semibold text-whiten">
+        {placeholder}
+      </label>
+      <input
+        type={inputType}
+        name={name}
+        value={isValue}
+        disabled={disabledStatus}
+        onChange={handleChange}
+        className="w-full rounded border-[1.5px] border-black-dark-300 bg-transparent px-5 py-3 font-normal text-whiten outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-black-dark-300 disabled:border-none dark:focus:border-primary"
+      />
+      {errors && <span className="text-red-500 text-xs my-3 block">{errors}</span>}
+    </div>
   );
 }
 

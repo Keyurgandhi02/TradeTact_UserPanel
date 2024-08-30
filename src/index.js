@@ -1,15 +1,30 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./store/AuthContext";
+import { LoadingProvider } from "./store/LoadingContext";
+import Loading from "./components/Loading";
+import { Offline, Online } from "react-detect-offline";
+import NoInternetConnection from "./components/NoInternetConnection";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Online>
+      <BrowserRouter>
+        <LoadingProvider>
+          <AuthProvider>
+            <Loading />
+            <App />
+          </AuthProvider>
+        </LoadingProvider>
+      </BrowserRouter>
+    </Online>
+    <Offline>
+      <NoInternetConnection />
+    </Offline>
   </React.StrictMode>
 );
