@@ -9,7 +9,7 @@ import {
   GENERAL_FETCH_ERROR,
   GENERAL_FORM_VALIDATIONS_ERROR,
   GENERAL_SUBMIT_ERROR,
-  STRATEGY_NO_ERROR,
+  TRADE_SETTINGS_NO_ERROR,
   WATCHLIST_PAGE_STRINGS,
 } from "../constants/Strings";
 import FloatButton from "./FloatButton";
@@ -23,11 +23,10 @@ import {
 } from "../config/firestoreOperations.js";
 import { validateAllFields } from "../config/validationUtils";
 import { useLoading } from "../store/LoadingContext";
-import ModalDialog from "./ModalDialog";
-import GeneralModalContent from "./GeneralModalContent";
 import GlobalButton from "./GlobalButton";
 import PageHeading from "./PageHeading";
 import { watchlistValidationRules } from "../config/validations";
+import GloablInfo from "./GloablInfo";
 
 const initialState = {
   created_at: "",
@@ -175,88 +174,87 @@ function CreateEditWatchlist() {
 
   return (
     <div className="md:mb-0 mb-12">
-      <div className="flex flex-col gap-9 p-10">
-        <PageHeading
-          title={
-            isEditMode
-              ? WATCHLIST_PAGE_STRINGS?.editWatchlist
-              : WATCHLIST_PAGE_STRINGS?.addWatchlist
-          }
-        />
-        <div className="rounded-lg  bg-black-dark-200 shadow-xl">
-          <form onSubmit={handleSubmit}>
-            <div className="p-6.5">
-              <GlobalInput
-                inputType="date"
-                placeholder="Date"
-                isValue={formData?.created_at}
-                name="created_at"
-                onChangeHandler={handleChange}
-                errors={errors?.created_at}
-              />
-
-              <GlobalInput
-                inputType="text"
-                placeholder="Script Name"
-                isValue={formData?.scriptName}
-                name="scriptName"
-                onChangeHandler={handleChange}
-                errors={errors?.scriptName}
-              />
-
-              <GlobalDropdown
-                options={options}
-                formData={formData?.strategyName}
-                selectDropDownHandler={selectDropDownHandler}
-                name="strategyName"
-                label="Select Strategy"
-                errors={errors?.strategyName}
-              />
-
-              <GlobalInput
-                inputType="number"
-                placeholder="Stock Price"
-                isValue={formData?.stockPrice}
-                onChangeHandler={handleChange}
-                name="stockPrice"
-                errors={errors?.stockPrice}
-              />
-
-              <GlobalDropdown
-                options={isStatusOptions}
-                formData={formData?.status}
-                selectDropDownHandler={selectDropDownHandler}
-                name="status"
-                label="Select Status"
-                errors={errors?.status}
-              />
-
-              <GlobalButton
-                btnTitle={isEditMode ? "Update" : "Submit"}
-                disabled={isDisable}
-                type="submit"
-                bgColor="bg-primary-500"
-                textColor=""
-              />
-            </div>
-          </form>
-        </div>
-      </div>
-      <Toaster position="top-right" reverseOrder={true} />
-      <ModalDialog
-        isOpen={isViewModal}
-        onClose={() => setViewModal(false)}
-        children={
-          <GeneralModalContent
-            heading="Trade Setting Required"
-            description={STRATEGY_NO_ERROR}
-            onRejectHandler={() => setViewModal(false)}
-            onSuccessHandler={() => navigate("/console/create_user_strategy")}
-            btnTitleReject="Cancel"
-            btnTitleSuccess="Create Strategy"
+      {!isViewModal && (
+        <div className="flex flex-col gap-9 p-10">
+          <PageHeading
+            title={
+              isEditMode
+                ? WATCHLIST_PAGE_STRINGS?.editWatchlist
+                : WATCHLIST_PAGE_STRINGS?.addWatchlist
+            }
           />
-        }
-      />
+          <div className="rounded-lg  bg-black-dark-200 shadow-xl">
+            <form onSubmit={handleSubmit}>
+              <div className="p-6.5">
+                <GlobalInput
+                  inputType="date"
+                  placeholder="Date"
+                  isValue={formData?.created_at}
+                  name="created_at"
+                  onChangeHandler={handleChange}
+                  errors={errors?.created_at}
+                />
+
+                <GlobalInput
+                  inputType="text"
+                  placeholder="Script Name"
+                  isValue={formData?.scriptName}
+                  name="scriptName"
+                  onChangeHandler={handleChange}
+                  errors={errors?.scriptName}
+                />
+
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Stock Price"
+                  isValue={formData?.stockPrice}
+                  onChangeHandler={handleChange}
+                  name="stockPrice"
+                  errors={errors?.stockPrice}
+                />
+
+                <GlobalDropdown
+                  options={options}
+                  formData={formData?.strategyName}
+                  selectDropDownHandler={selectDropDownHandler}
+                  name="strategyName"
+                  label="Select Strategy"
+                  errors={errors?.strategyName}
+                />
+
+                <GlobalDropdown
+                  options={isStatusOptions}
+                  formData={formData?.status}
+                  selectDropDownHandler={selectDropDownHandler}
+                  name="status"
+                  label="Select Status"
+                  errors={errors?.status}
+                />
+
+                <GlobalButton
+                  btnTitle={isEditMode ? "Update" : "Submit"}
+                  disabled={isDisable}
+                  type="submit"
+                  bgColor="bg-primary-500"
+                  textColor=""
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      <Toaster position="top-right" reverseOrder={true} />
+
+      {isViewModal && (
+        <GloablInfo
+          firstTitle="Oopss!!"
+          secondTitle="Trade Setting Required"
+          desc={TRADE_SETTINGS_NO_ERROR}
+          linktitle="Go to Console"
+          link="/console/create_user_strategy"
+        />
+      )}
+
       <FloatButton
         onClickHandler={onFloatBtnClickHandler}
         icon={<LIST_FLOAT_SVG />}

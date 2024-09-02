@@ -24,29 +24,26 @@ function DataCard({ data, deleteHandler, editHandler, viewHandler }) {
       </div>
       <div className="border-b border-black-dark-300 my-3"></div>
       <div className="grid grid-cols-3 gap-4 mb-5">
-        <DataCardItem
-          title="ENTRY"
-          data={formatNumber(data?.entryPrice)}
-        />
-        <DataCardItem
-          title="EXIT"
-          data={formatNumber(data?.exitPrice)}
-        />
+        <DataCardItem title="ENTRY" data={formatNumber(data?.entryPrice)} />
+        <DataCardItem title="EXIT" data={formatNumber(data?.exitPrice)} />
         <DataCardItem title="SL" data={formatNumber(data?.slPrice)} />
       </div>
       <div className="grid grid-cols-3 gap-4 mb-5">
-        <DataCardItem
-          title="TARGET"
-          data={formatNumber(data?.targetPrice)}
-        />
+        <DataCardItem title="TARGET" data={formatNumber(data?.targetPrice)} />
         <DataCardItem title="QTY" data={data?.quantity} />
-        <DataCardItem title="USER" data={data?.dematUser} />
+        <DataCardItem
+          title="INVESTED"
+          data={formatNumber(Number(data?.entryPrice) * Number(data?.quantity))}
+        />
       </div>
 
       <div className="grid grid-cols-3 gap-4 mb-5">
+        <DataCardItem
+          title="RETURNED"
+          data={formatNumber(Number(data?.exitPrice) * Number(data?.quantity))}
+        />
+        <DataCardItem title="USER" data={data?.dematUser} />
         <DataCardItem title="STRATEGY" data={data?.strategyName} />
-        <DataCardItem title="BROKER" data={data?.broker} />
-        <DataCardItem title="RATING" data={data?.rating} />
       </div>
       <div className="border-b border-black-dark-300 my-3"></div>
       <div className="flex justify-between items-center">
@@ -75,7 +72,7 @@ function DataCard({ data, deleteHandler, editHandler, viewHandler }) {
             data?.profitLossPrice > 0 ? "text-green-500" : "text-red-500"
           }`}
         >
-           {formatNumber(data?.profitLossPrice)}
+          {formatNumber(data?.profitLossPrice)}
         </div>
       </div>
     </div>

@@ -134,27 +134,27 @@ function ReturnPerformance() {
                 </div>
                 <div className="border-b border-black-dark-300 my-3"></div>
                 <div className="grid grid-cols-3 gap-4 mb-4 text-sm text-black-2">
-                  <DataCardItem title="Date" data={data?.created_at} />
+                  <DataCardItem title="DATE" data={data?.created_at} />
                   <DataCardItem
-                    title="Invested Amount"
+                    title="INVESTED"
                     data={formatNumber(data?.invested_amount)}
                   />
                   <DataCardItem
-                    title="Return Amount"
+                    title="RETURNED"
                     data={formatNumber(data?.returned_amount)}
                   />
                 </div>
                 <div className="grid grid-cols-3 gap-4 mb-4 text-sm text-black-2">
                   <DataCardItem
-                    title="Return (%)"
-                    data={parseFloat(data?.returnPercentage)}
+                    title="RETURN (%)"
+                    data={parseFloat(data?.returnPercentage).toFixed(2)}
                   />
                   <DataCardItem
-                    title="Realised Gain"
+                    title="GAIN"
                     data={formatNumber(data?.returnAmount)}
                   />
                   <DataCardItem
-                    title="Charges"
+                    title="CHARGES"
                     data={formatNumber(data?.charges)}
                   />
                 </div>

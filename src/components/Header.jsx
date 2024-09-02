@@ -1,5 +1,5 @@
 import { Disclosure, DisclosureButton } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import HeaderPopover from "./HeaderPopover";
 import HeaderNavItem from "./HeaderNavItem";
 import MobileMenu from "./MobileMenu";
@@ -7,7 +7,7 @@ import MobileMenu from "./MobileMenu";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../store/AuthContext";
 
-export default function Header({ sendDataToParent }) {
+export default function Header() {
   const { logout } = useAuth();
   const location = useLocation();
 
@@ -108,13 +108,6 @@ export default function Header({ sendDataToParent }) {
           </div>
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {/* <button
-              onClick={() => sendDataToParent(true)}
-              className="outline-none text-sm mr-3 font-bold leading-6 text-whiten hover:text-primary-300"
-            >
-              <BellIcon aria-hidden="true" className="h-6 w-6" />
-            </button> */}
-
             <HeaderPopover logout={logout} />
           </div>
         </div>

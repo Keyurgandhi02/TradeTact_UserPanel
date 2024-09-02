@@ -10,6 +10,7 @@ import { formatNumber } from "../config/helper";
 import NoRecordFound from "../components/NoRecordFound";
 import LongCard from "../components/LongCard";
 import LongCardItem from "../components/LongCardItem";
+import CardTitle from "../components/CardTitle";
 function AnalyticsPage() {
   const { currentUser } = useAuth();
   const { startLoading, stopLoading } = useLoading();
@@ -142,9 +143,7 @@ function AnalyticsPage() {
 
             {/* Right Donut Chart Container */}
             <div className="col-span-12 md:col-span-3 rounded-xl bg-black-dark-200 px-4 py-5 shadow-default sm:px-7.5">
-              <h4 className="mb-4 mt-4 text-xl font-bold text-primary-400">
-                Trade User Analysis
-              </h4>
+              <CardTitle title="Trade User Analysis" />
               <div className="border-b mb-5 border-black-dark-300"></div>
               <div className="donut">
                 <Chart
@@ -164,42 +163,45 @@ function AnalyticsPage() {
 
           <div className="p-4 mt-4 grid grid-cols-1 gap-4 md:grid-cols-12 md:mt-6 2xl:mt-7.5 2xl:gap-7.5">
             <div className="col-span-12 md:col-span-12 rounded-xl bg-black-dark-200 px-4 py-5 shadow-default sm:px-7.5">
-              <h4 className="mb-6 mt-4 text-xl font-bold text-primary-400">
-                Trade Details Analysis
-              </h4>
-              {rowsData.map((item, i) => (
-                <LongCard
-                  children={
-                    <>
-                      <LongCardItem heading={columns[0]} value={item?.month} />
-                      <LongCardItem
-                        heading={columns[1]}
-                        value={item?.totalItems}
-                      />
-                      <LongCardItem
-                        heading={columns[2]}
-                        value={item?.profitCount}
-                      />
-                      <LongCardItem
-                        heading={columns[3]}
-                        value={item?.lossCount}
-                      />
-                      <LongCardItem
-                        heading={columns[4]}
-                        value={item?.totalProfitLoss}
-                      />
-                      <LongCardItem
-                        heading={columns[5]}
-                        value={item?.totalBought}
-                      />
-                      <LongCardItem
-                        heading={columns[6]}
-                        value={item?.totalSold}
-                      />
-                    </>
-                  }
-                />
-              ))}
+              <CardTitle title="Trade Details Analysis" />
+              <div className="h-100 overflow-y-auto no-scrollbar">
+                {rowsData.map((item, i) => (
+                  <LongCard
+                    children={
+                      <>
+                        <LongCardItem
+                          heading={columns[0]}
+                          value={item?.month}
+                        />
+                        <LongCardItem
+                          heading={columns[1]}
+                          value={item?.totalItems}
+                        />
+                        <LongCardItem
+                          heading={columns[2]}
+                          value={item?.profitCount}
+                        />
+                        <LongCardItem
+                          heading={columns[3]}
+                          value={item?.lossCount}
+                        />
+                        <LongCardItem
+                          heading={columns[4]}
+                          value={item?.totalProfitLoss}
+                        />
+                        <LongCardItem
+                          heading={columns[5]}
+                          value={item?.totalBought}
+                        />
+                        <LongCardItem
+                          heading={columns[6]}
+                          value={item?.totalSold}
+                        />
+                      </>
+                    }
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </>

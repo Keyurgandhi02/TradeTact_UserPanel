@@ -135,10 +135,10 @@ function Watchlist() {
                 </div>
                 <div className="border-b border-black-dark-300 my-3"></div>
                 <div className="grid grid-cols-3 gap-4 mb-4 text-sm text-black-2">
-                  <DataCardItem title="Buy Date" data={data?.created_at} />
-                  <DataCardItem title="Strategy" data={data?.strategyName} />
+                  <DataCardItem title="BUY DATE" data={data?.created_at} />
+                  <DataCardItem title="STRATEGY" data={data?.strategyName} />
                   <DataCardItem
-                    title="Stock Price"
+                    title="STOCK PRICE"
                     data={formatNumber(data?.stockPrice)}
                   />
                 </div>

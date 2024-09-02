@@ -48,8 +48,7 @@ function TradeJournal() {
         "desc",
         "buyDate"
       );
-      console.log("data",data)
-
+ 
       setFetchedData((prevData) =>
         isLoadMore ? [...prevData, ...data] : data
       );
@@ -132,6 +131,7 @@ function TradeJournal() {
     setFilteredResults(filterData(fetchedData, searchTerm, "scriptName"));
   }, [searchTerm, fetchedData]);
 
+
   return (
     <div className="md:mb-0 mb-12">
       {fetchedData.length && (
@@ -163,22 +163,28 @@ function TradeJournal() {
         children={
           <>
             <div className="grid p-3 mb-2 ">
+              <DataCardItem title="RATING" data={isModalData?.rating} />
+            </div>
+            <div className="grid p-3 mb-2 ">
+              <DataCardItem title="BROKER" data={isModalData?.broker} />
+            </div>
+            <div className="grid p-3 mb-2 ">
               <DataCardItem
-                title="Emotions When Enter"
+                title="EMOTIONS WHEN ENTER"
                 data={isModalData?.emotionsWhenEnter}
               />
             </div>
             <div className="grid p-3 mb-2 ">
               <DataCardItem
-                title="Emotions When Enter"
-                data={isModalData?.emotionsWhenEnter}
+                title="EMOTIONS WHEN EXIT"
+                data={isModalData?.emotionsWhenExit}
               />
             </div>
             <div className="grid p-3 mb-2">
-              <DataCardItem title="Mistake" data={isModalData?.mistake} />
+              <DataCardItem title="MISTAKE" data={isModalData?.mistake} />
             </div>
             <div className="grid p-3 mb-2">
-              <DataCardItem title="Learning" data={isModalData?.learning} />
+              <DataCardItem title="LEARNING" data={isModalData?.learning} />
             </div>
           </>
         }

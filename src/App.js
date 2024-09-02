@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthenticatedLayout from "./components/AuthenticatedLayout";
 import PrivateRoute from "./PrivateRoute";
-import "./App.css";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NotFound404Page from "./pages/NotFound404Page";
 import AnalyticsPage from "./pages/AnalyticsPage";
@@ -30,7 +29,6 @@ const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 const UpdatesPage = lazy(() => import("./pages/UpdatesPage"));
 const ConsolePage = lazy(() => import("./pages/ConsolePage"));
-const DownloadsPage = lazy(() => import("./pages/DownloadsPage"));
 
 function App() {
   return (
@@ -80,7 +78,6 @@ function App() {
                 element={<CreateEditReturnPerformance />}
               />
               <Route path="/profile" element={<ProfilePage />} />
-              {/* <Route path="/downloads" element={<DownloadsPage />} /> */}
               <Route path="/updates" element={<UpdatesPage />} />
               <Route path="/console/*" element={<ConsolePage />} />
             </Route>

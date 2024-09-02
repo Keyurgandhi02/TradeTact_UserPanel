@@ -25,7 +25,7 @@ function UserProfile({ userData, fetchedData }) {
 
   return (
     <div className="flex flex-col gap-9 p-10">
-      <PageHeading title="Profile Information" />
+      <PageHeading title="Your Profile" />
       <div className="rounded-lg bg-black-dark-200 shadow-xl">
         <form action="#" className="p-5">
           <GlobalInput

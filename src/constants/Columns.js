@@ -11,14 +11,13 @@ export const WATCHLIST_DROPDOWNS = [
     id: "3",
     label: "Buy",
   },
-
-  {
-    id: "4",
-    label: "Short",
-  },
   {
     id: "5",
     label: "Sell",
+  },
+  {
+    id: "4",
+    label: "Short",
   },
 ];
 
@@ -41,6 +40,14 @@ export const TRADE_TYPE_DROPDOWNS = [
   },
   {
     id: 5,
-    label: "Intraday Buy (Margin)",
+    label: "Intraday Short (Margin)",
+  },
+  {
+    id: 6,
+    label: "Carry Forward",
+  },
+  {
+    id: 7,
+    label: "Other",
   },
 ];

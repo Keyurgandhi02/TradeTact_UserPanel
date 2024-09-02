@@ -12,7 +12,7 @@ import {
   RealizedPLSVG,
   TotalTradesSVG,
 } from "../UI/GlobalSVG";
-
+import CardTitle from "../components/CardTitle";
 import { useLoading } from "../store/LoadingContext";
 import { useNavigate } from "react-router-dom";
 import UpdateInfoCard from "../components/UpdateInfoCard";
@@ -116,9 +116,7 @@ function HomePage() {
 
       <div className="p-4 mt-4 grid grid-cols-1 gap-4 md:grid-cols-12 md:mt-6 2xl:mt-7.5 2xl:gap-7.5">
         <div className="col-span-12 md:col-span-12 rounded-xl bg-black-dark-200 px-4 py-5 shadow-default sm:px-7.5">
-          <h4 className="mb-2 mt-4 text-xl font-bold text-primary-400">
-            Top Updates
-          </h4>
+          <CardTitle title="Market Updates" />
           <div className="h-84 overflow-y-auto">
             <UpdateInfoCard />
           </div>

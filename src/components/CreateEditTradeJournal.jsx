@@ -26,10 +26,9 @@ import {
 import { useLoading } from "../store/LoadingContext";
 import PageHeading from "./PageHeading";
 import GlobalButton from "./GlobalButton";
-import ModalDialog from "./ModalDialog";
-import GeneralModalContent from "./GeneralModalContent";
 import { validateAllFields } from "../config/validationUtils";
 import { tradeJournalValidationRules } from "../config/validations";
+import GloablInfo from "./GloablInfo";
 
 const initialState = {
   scriptName: "",
@@ -190,9 +189,9 @@ function CreateEditTradeJournal() {
         );
 
         if (
-          !fetchedOptions.length > 0 &&
-          !fetchedOptions1.length > 0 &&
-          !fetchedOptions2.length > 0
+          fetchedOptions.length === 0 ||
+          fetchedOptions1.length === 0 ||
+          fetchedOptions2.length === 0
         ) {
           setViewModal(true);
           setDisable(true);
@@ -200,6 +199,7 @@ function CreateEditTradeJournal() {
           setOptions(fetchedOptions);
           setOptions1(fetchedOptions1);
           setOptions2(fetchedOptions2);
+          setViewModal(false);
         }
       } catch (error) {
         setDisable(true);
@@ -213,202 +213,201 @@ function CreateEditTradeJournal() {
 
   return (
     <div className="md:mb-0 mb-12">
-      <div className="flex flex-col gap-9 p-10">
-        <PageHeading
-          title={
-            isEditMode
-              ? TRADE_PAGE_STRINGS?.editTransactions
-              : TRADE_PAGE_STRINGS?.addTransactions
-          }
-        />
-        <div className="rounded-lg bg-black-dark-200 shadow-xl">
-          {/* <span
+      {!isViewModal && (
+        <div className="flex flex-col gap-9 p-10">
+          <PageHeading
+            title={
+              isEditMode
+                ? TRADE_PAGE_STRINGS?.editTransactions
+                : TRADE_PAGE_STRINGS?.addTransactions
+            }
+          />
+          <div className="rounded-lg bg-black-dark-200 shadow-xl">
+            {/* <span
             className="text-whiten font-semibold float-right p-5"
             onClick={() => updateSubscriptionStatus()}
           >
             AutoFill Form
           </span> */}
-          <form onSubmit={handleSubmit}>
-            <div className="p-6.5">
-              <GlobalInput
-                inputType="text"
-                placeholder="Script Name"
-                isValue={formData?.scriptName}
-                name="scriptName"
-                errors={errors?.scriptName}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-              />
-              <GlobalInput
-                inputType="date"
-                placeholder="Buy Date"
-                isValue={formData?.buyDate}
-                name="buyDate"
-                errors={errors?.buyDate}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-              />
+            <form onSubmit={handleSubmit}>
+              <div className="p-6.5">
+                <GlobalInput
+                  inputType="text"
+                  placeholder="Script Name"
+                  isValue={formData?.scriptName}
+                  name="scriptName"
+                  errors={errors?.scriptName}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                />
+                <GlobalInput
+                  inputType="date"
+                  placeholder="Transaction Date"
+                  isValue={formData?.buyDate}
+                  name="buyDate"
+                  errors={errors?.buyDate}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                />
 
-              <GlobalInput
-                inputType="number"
-                placeholder="Entry Price"
-                isValue={formData?.entryPrice}
-                errors={errors?.entryPrice}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-                name="entryPrice"
-              />
+                <GlobalDropdown
+                  options={options}
+                  formData={formData?.broker}
+                  errors={errors?.broker}
+                  selectDropDownHandler={selectDropDownHandler}
+                  name="broker"
+                  label="Select Broker"
+                />
 
-              <GlobalInput
-                inputType="number"
-                placeholder="SL Price"
-                isValue={formData?.slPrice}
-                errors={errors?.slPrice}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-                name="slPrice"
-              />
+                <GlobalDropdown
+                  options={options2}
+                  formData={formData?.strategyName}
+                  errors={errors?.strategyName}
+                  selectDropDownHandler={selectDropDownHandler}
+                  name="strategyName"
+                  label="Select Strategy"
+                />
 
-              <GlobalInput
-                inputType="number"
-                placeholder="Target Price"
-                isValue={formData?.targetPrice}
-                errors={errors?.targetPrice}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-                name="targetPrice"
-              />
+                <GlobalDropdown
+                  options={options1}
+                  formData={formData?.dematUser}
+                  errors={errors?.dematUser}
+                  selectDropDownHandler={selectDropDownHandler}
+                  name="dematUser"
+                  label="Select Demat User"
+                />
+                <GlobalDropdown
+                  options={TRADE_TYPE_DROPDOWNS}
+                  formData={formData?.trade_type}
+                  errors={errors?.trade_type}
+                  selectDropDownHandler={selectDropDownHandler}
+                  name="trade_type"
+                  label="Trade Type"
+                />
 
-              <GlobalInput
-                inputType="number"
-                placeholder="Exit Price"
-                isValue={formData?.exitPrice}
-                errors={errors?.exitPrice}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-                name="exitPrice"
-              />
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Entry Price"
+                  isValue={formData?.entryPrice}
+                  errors={errors?.entryPrice}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                  name="entryPrice"
+                />
 
-              <GlobalInput
-                inputType="number"
-                placeholder="Quantity"
-                isValue={formData?.quantity}
-                errors={errors?.quantity}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-                name="quantity"
-              />
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Stop Loss Price"
+                  isValue={formData?.slPrice}
+                  errors={errors?.slPrice}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                  name="slPrice"
+                />
 
-              <GlobalInput
-                inputType="number"
-                placeholder="Profit/Loss Price"
-                isValue={formData?.profitLossPrice}
-                errors={errors?.profitLossPrice}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-                name="profitLossPrice"
-              />
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Target Price"
+                  isValue={formData?.targetPrice}
+                  errors={errors?.targetPrice}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                  name="targetPrice"
+                />
 
-              <GlobalInput
-                inputType="text"
-                placeholder="Emotions When Enter"
-                isValue={formData?.emotionsWhenEnter}
-                errors={errors?.emotionsWhenEnter}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-                name="emotionsWhenEnter"
-              />
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Exit Price"
+                  isValue={formData?.exitPrice}
+                  errors={errors?.exitPrice}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                  name="exitPrice"
+                />
 
-              <GlobalInput
-                inputType="text"
-                placeholder="Emotions When Exit"
-                isValue={formData?.emotionsWhenExit}
-                errors={errors?.emotionsWhenExit}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-                name="emotionsWhenExit"
-              />
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Qty/Lot"
+                  isValue={formData?.quantity}
+                  errors={errors?.quantity}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                  name="quantity"
+                />
 
-              <GlobalDropdown
-                options={options}
-                formData={formData?.broker}
-                errors={errors?.broker}
-                selectDropDownHandler={selectDropDownHandler}
-                name="broker"
-                label="Select Broker"
-              />
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Total Profit/Loss"
+                  isValue={formData?.profitLossPrice}
+                  errors={errors?.profitLossPrice}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                  name="profitLossPrice"
+                />
 
-              <GlobalDropdown
-                options={options2}
-                formData={formData?.strategyName}
-                errors={errors?.strategyName}
-                selectDropDownHandler={selectDropDownHandler}
-                name="strategyName"
-                label="Select Strategy"
-              />
+                <GlobalInput
+                  inputType="text"
+                  placeholder="Emotions When Enter"
+                  isValue={formData?.emotionsWhenEnter}
+                  errors={errors?.emotionsWhenEnter}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                  name="emotionsWhenEnter"
+                />
 
-              <GlobalDropdown
-                options={options1}
-                formData={formData?.dematUser}
-                errors={errors?.dematUser}
-                selectDropDownHandler={selectDropDownHandler}
-                name="dematUser"
-                label="Select Demat User"
-              />
-              <GlobalDropdown
-                options={TRADE_TYPE_DROPDOWNS}
-                formData={formData?.trade_type}
-                errors={errors?.trade_type}
-                selectDropDownHandler={selectDropDownHandler}
-                name="trade_type"
-                label="Trade Type"
-              />
+                <GlobalInput
+                  inputType="text"
+                  placeholder="Emotions When Exit"
+                  isValue={formData?.emotionsWhenExit}
+                  errors={errors?.emotionsWhenExit}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                  name="emotionsWhenExit"
+                />
 
-              <GlobalInput
-                inputType="number"
-                placeholder="Rating out of 5"
-                isValue={formData?.rating}
-                errors={errors?.rating}
-                onChangeHandler={(name, value) => handleChange(name, value)}
-                name="rating"
-              />
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Rating out of 5"
+                  isValue={formData?.rating}
+                  errors={errors?.rating}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                  name="rating"
+                />
 
-              <GlobalTextArea
-                row="4"
-                label=""
-                placeholder="Learning"
-                isValue={formData?.learning}
-                errors={errors?.learning}
-                name="learning"
-                onChangeHandler={(name, value) => handleChange(name, value)}
-              />
+                <GlobalTextArea
+                  row="4"
+                  label=""
+                  placeholder="Learning"
+                  isValue={formData?.learning}
+                  errors={errors?.learning}
+                  name="learning"
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                />
 
-              <GlobalTextArea
-                row="4"
-                label=""
-                placeholder="Mistake"
-                isValue={formData?.mistake}
-                errors={errors?.mistake}
-                name="mistake"
-                onChangeHandler={(name, value) => handleChange(name, value)}
-              />
+                <GlobalTextArea
+                  row="4"
+                  label=""
+                  placeholder="Mistake"
+                  isValue={formData?.mistake}
+                  errors={errors?.mistake}
+                  name="mistake"
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                />
 
-              <GlobalButton
-                btnTitle={isEditMode ? "Update" : "Submit"}
-                disabled={isDisable}
-                type="submit"
-                onButtonClickHandler={handleSubmit}
-                bgColor="bg-primary-500"
-              />
-            </div>
-          </form>
+                <GlobalButton
+                  btnTitle={isEditMode ? "Update" : "Submit"}
+                  disabled={isDisable}
+                  type="submit"
+                  onButtonClickHandler={handleSubmit}
+                  bgColor="bg-primary-500"
+                />
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
       <Toaster position="top-right" reverseOrder={true} />
-      <ModalDialog
-        isOpen={isViewModal}
-        onClose={() => setViewModal(false)}
-        children={
-          <GeneralModalContent
-            heading="Trade Setting Required"
-            description={TRADE_SETTINGS_NO_ERROR}
-            onRejectHandler={() => setViewModal(false)}
-            onSuccessHandler={() => navigate("/console/create_user_strategy")}
-            btnTitleReject="Cancel"
-            btnTitleSuccess="Goto Console"
-          />
-        }
-      />
+
+      {isViewModal && (
+        <GloablInfo
+          firstTitle="Oopss!!"
+          secondTitle="Trade Setting Required"
+          desc={TRADE_SETTINGS_NO_ERROR}
+          linktitle="Go to Console"
+          link="/console/create_user_strategy"
+        />
+      )}
+
       <FloatButton
         onClickHandler={onFloatBtnClickHandler}
         icon={<LIST_FLOAT_SVG />}
