@@ -51,3 +51,18 @@ export const TRADE_TYPE_DROPDOWNS = [
     label: "Other",
   },
 ];
+
+export const TRADE_ANALYSIS_DETAILS_COLUMNS = [
+  "Month",
+  "Trades",
+  "Win Trades",
+  "Loss Trades",
+  "Total Gain",
+  "Total Bought",
+  "Total Sold",
+];
+
+export const TRADE_ANALYSIS_USER_COLUMNS = [
+  "User",
+  ...TRADE_ANALYSIS_DETAILS_COLUMNS,
+];
