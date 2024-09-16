@@ -566,15 +566,20 @@ export const CLOSE_SVG = () => {
 export const DOWNLOAD_SVG = () => {
   return (
     <svg
+      class="w-5.5 h-5.5 text-gray-800 dark:text-white"
+      aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
       viewBox="0 0 24 24"
-      fill="currentColor"
-      className="size-6"
     >
       <path
-        fillRule="evenodd"
-        d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
-        clipRule="evenodd"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 13V4M7 14H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2m-1-5-4 5-4-5m9 8h.01"
       />
     </svg>
   );
@@ -618,16 +623,16 @@ export const SEARCH_SVG = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6 opacity-30"
       fill="none"
       viewBox="0 0 24 24"
+      stroke-width="1.5"
       stroke="currentColor"
+      class="w-5 h-5 mx-3 text-gray-400 dark:text-gray-600"
     >
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
-        stroke-width="2"
-        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
       />
     </svg>
   );
@@ -674,5 +679,38 @@ export const MINUS_SVG = () => {
         d="M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
       />
     </svg>
+  );
+};
+
+export const REMOVE_SVG_WARNING_MODEL = () => {
+  return (
+    <>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-4 -m-1 flex items-center text-blue-400 mx-auto"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        ></path>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-16 h-16 flex items-center text-gray-600 mx-auto"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </>
   );
 };
