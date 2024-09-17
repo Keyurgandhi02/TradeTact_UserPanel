@@ -19,12 +19,11 @@ import DataCard from "./DataCard";
 import ModalDialog from "./ModalDialog";
 import DataCardItem from "./DataCardItem";
 import GeneralModalContent from "./GeneralModalContent";
-import SearchBar from "./SearchBar";
 import { handleExport } from "./ExportCSVButton";
 import { filterData } from "../config/helper";
-import PageHeading from "./PageHeading";
-import ActionsButton from "./ActionsButton";
-import { DOWNLOAD_SVG, REMOVE_SVG_WARNING_MODEL } from "../UI/GlobalSVG";
+import { REMOVE_SVG_WARNING_MODEL } from "../UI/GlobalSVG";
+import PageHeader from "./PageHeader";
+import PageHeaderActions from "./PageHeaderActions";
 
 function TradeJournal() {
   const navigate = useNavigate();
@@ -163,56 +162,21 @@ function TradeJournal() {
 
   return (
     <div className="md:mb-0 mb-12">
-      {/* {fetchedData.length && (
-        <SearchBar
-          downloadHandler={downloadHandler}
+      <PageHeader
+        pageTitle="Trade Journal"
+        isListPage={true}
+        firstData={totalDocuments}
+        firstDataTitle="Trades"
+        secondData={fetchedData.length}
+        secondSubData={totalDocuments}
+      />
+
+      {fetchedData.length > 0 && (
+        <PageHeaderActions
           onChangeHandler={onChangeHandler}
+          downloadHandler={downloadHandler}
         />
-      )} */}
-
-      <div class="sm:flex sm:items-center sm:justify-between px-6 py-8">
-        <div>
-          <div class="flex items-center gap-x-3">
-            <PageHeading title="Trade Journal" isListPage={true} />
-
-            <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">
-              {totalDocuments} Trades
-            </span>
-          </div>
-
-          <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">
-            {fetchedData.length} records showing out of {totalDocuments}
-          </p>
-        </div>
-        <div class="flex items-center mt-4 gap-x-3">
-          <ActionsButton
-            icon={<DOWNLOAD_SVG />}
-            label="Download"
-            onClickHandler={downloadHandler}
-          />
-        </div>
-      </div>
-
-      <div class="md:flex md:items-center md:justify-between px-6 py-2">
-        <div class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
-          <button class="px-5 py-3 text-xs font-medium text-gray-600 transition-colors duration-200 bg-gray-100 sm:text-sm dark:bg-gray-800 dark:text-gray-300">
-            View all
-          </button>
-
-          <button class="px-5 py-3 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
-            Monitored
-          </button>
-
-          <button class="px-5 py-3 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
-            Unmonitored
-          </button>
-        </div>
-
-        <div className="md:w-100 w-auto py-1 items-center mt-4 md:mt-0">
-          <SearchBar onChangeHandler={onChangeHandler} />
-        </div>
-      </div>
-
+      )}
 
       {filteredResults.length > 0 ? (
         <>

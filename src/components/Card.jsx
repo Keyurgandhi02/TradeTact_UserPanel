@@ -3,7 +3,7 @@ import React from "react";
 function Card({ icon, value, heading, onClickHandler }) {
   return (
     <div
-      className={`rounded-xl p-6 bg-black-dark-200 ${
+      className={`rounded-md p-6 bg-black-dark-200 ${
         onClickHandler ? "cursor-pointer" : "cursor-default"
       }`}
       onClick={onClickHandler}

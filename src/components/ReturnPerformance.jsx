@@ -15,8 +15,9 @@ import { DELETE_SVG, EDIT_SVG } from "../UI/GlobalSVG";
 import DataCardItem from "./DataCardItem";
 import ModalDialog from "./ModalDialog";
 import GeneralModalContent from "./GeneralModalContent";
-import SearchBar from "./SearchBar";
 import { handleExport } from "./ExportCSVButton";
+import PageHeader from "./PageHeader";
+import PageHeaderActions from "./PageHeaderActions";
 
 function ReturnPerformance() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function ReturnPerformance() {
   const [isDeleteModal, setDeleteModal] = useState(false);
   const [selectedDocumentId, setSelectedDocumentId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [totalDocuments, setTotalDocuments] = useState(0);
   const [filteredResults, setFilteredResults] = useState(fetchedData);
 
   // Fetch ROI
@@ -39,6 +41,7 @@ function ReturnPerformance() {
       "desc",
       "doc_created_At"
     );
+    setTotalDocuments(fetchedTasks.length);
     setFetchedData(fetchedTasks);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser.uid]);
@@ -106,10 +109,19 @@ function ReturnPerformance() {
 
   return (
     <div className="md:mb-0 mb-12">
-      {fetchedData.length && (
-        <SearchBar
-          downloadHandler={downloadHandler}
+      <PageHeader
+        pageTitle="Return Performance"
+        isListPage={true}
+        firstData={totalDocuments}
+        firstDataTitle="Returns"
+        secondData={fetchedData.length}
+        secondSubData={totalDocuments}
+      />
+
+      {fetchedData.length > 0 && (
+        <PageHeaderActions
           onChangeHandler={onChangeHandler}
+          downloadHandler={downloadHandler}
         />
       )}
 

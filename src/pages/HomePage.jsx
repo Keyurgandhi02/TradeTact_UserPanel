@@ -75,9 +75,23 @@ function HomePage() {
 
   return (
     <>
-      <div className="p-4 grid grid-cols-1 gap-4 md:grid-cols-12 lg:grid-cols-12 2xl:gap-7.5">
+      <div className="p-3 grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-4 mt-1">
+        <div className="col-span-12 bg-black-dark-200 rounded-md px-4 py-3 shadow-default flex items-center justify-between">
+          <div className="font-bold text-xl text-secondary leading-none">
+            Good day, {currentUser?.displayName}
+          </div>
+          <button
+            className="bg-primary-300 text-black-dark-200 px-4 py-2 rounded-md"
+            onClick={() => navigate("/create_trade_journal")}
+          >
+            Start tracking
+          </button>
+        </div>
+      </div>
+
+      <div className="p-3 grid grid-cols-1 gap-4 md:grid-cols-12 lg:grid-cols-12 2xl:gap-7.5">
         {/* First Column: All Cards */}
-        <div className="col-span-12 md:col-span-3 lg:col-span-3 space-y-4 mt-5">
+        <div className="col-span-12 md:col-span-3 lg:col-span-3 space-y-4">
           <div className="space-y-4">
             <Card
               icon={<GainSVG />}
@@ -117,14 +131,14 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="col-span-12 md:col-span-5 lg:col-span-5 rounded-xl bg-black-dark-200 px-4 py-5 mt-5 shadow-default sm:px-7.5 flex flex-col">
+        <div className="col-span-12 md:col-span-5 lg:col-span-5 rounded-md bg-black-dark-200 px-4 py-5  shadow-default sm:px-7.5 flex flex-col">
           <CardTitle title="Market Updates" />
           <div className="h-full overflow-y-auto no-scrollbar">
             <UpdateInfoCard />
           </div>
         </div>
 
-        <div className="col-span-12 md:col-span-4 lg:col-span-4 rounded-xl bg-black-dark-200 px-4 py-5 mt-5 shadow-default sm:px-7.5 flex flex-col">
+        <div className="col-span-12 md:col-span-4 lg:col-span-4 rounded-md bg-black-dark-200 px-4 py-5  shadow-default sm:px-7.5 flex flex-col">
           <CardTitle title="Market Events" />
           <EconomicCalendar
             colorTheme="dark"
@@ -135,6 +149,13 @@ function HomePage() {
           ></EconomicCalendar>
         </div>
       </div>
+
+      {/* <div className="p-4 grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-4">
+        <div className="col-span-12 bg-black-dark-200 rounded-md px-4 py-5 shadow-default">
+          <CardTitle title="First Row Content" />
+          <p>Content for the first row goes here.</p>
+        </div>
+      </div> */}
     </>
   );
 }

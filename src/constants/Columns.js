@@ -66,3 +66,18 @@ export const TRADE_ANALYSIS_USER_COLUMNS = [
   "User",
   ...TRADE_ANALYSIS_DETAILS_COLUMNS,
 ];
+
+export const TRADE_FILTERS_DROPDOWNS = [
+  {
+    id: 1,
+    label: "All",
+  },
+  {
+    id: 2,
+    label: "Gain",
+  },
+  {
+    id: 3,
+    label: "Loss",
+  },
+];

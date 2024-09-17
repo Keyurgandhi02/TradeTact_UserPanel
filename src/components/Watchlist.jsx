@@ -15,8 +15,9 @@ import { DELETE_SVG, EDIT_SVG } from "../UI/GlobalSVG";
 import DataCardItem from "./DataCardItem";
 import ModalDialog from "./ModalDialog";
 import GeneralModalContent from "./GeneralModalContent";
-import SearchBar from "./SearchBar";
 import { handleExport } from "./ExportCSVButton";
+import PageHeader from "./PageHeader";
+import PageHeaderActions from "./PageHeaderActions";
 
 function Watchlist() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function Watchlist() {
   const [isDeleteModal, setDeleteModal] = useState(false);
   const [selectedDocumentId, setSelectedDocumentId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [totalDocuments, setTotalDocuments] = useState(0);
   const [filteredResults, setFilteredResults] = useState(fetchedData);
 
   // Fetch Watchlist
@@ -39,7 +41,7 @@ function Watchlist() {
       "desc",
       "doc_created_At"
     );
-
+    setTotalDocuments(fetchedTasks.length);
     setFetchedData(fetchedTasks);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser.uid]);
@@ -108,10 +110,19 @@ function Watchlist() {
 
   return (
     <div className="md:mb-0 mb-12">
-      {fetchedData.length && (
-        <SearchBar
-          downloadHandler={downloadHandler}
+      <PageHeader
+        pageTitle="Watchlist"
+        isListPage={true}
+        firstData={totalDocuments}
+        firstDataTitle="Stock"
+        secondData={fetchedData.length}
+        secondSubData={totalDocuments}
+      />
+
+      {fetchedData.length > 0 && (
+        <PageHeaderActions
           onChangeHandler={onChangeHandler}
+          downloadHandler={downloadHandler}
         />
       )}
       {filteredResults.length > 0 ? (
