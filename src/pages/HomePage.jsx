@@ -14,15 +14,13 @@ import {
 } from "../UI/GlobalSVG";
 import CardTitle from "../components/CardTitle";
 import { useLoading } from "../store/LoadingContext";
-import { useNavigate } from "react-router-dom";
 import UpdateInfoCard from "../components/UpdateInfoCard";
-import { EconomicCalendar } from "react-ts-tradingview-widgets";
+import AnalyticsPage from "./AnalyticsPage";
 
 function HomePage() {
   const { currentUser } = useAuth();
   const { startLoading, stopLoading } = useLoading();
   const [fetchedData, setFetchedData] = useState([]);
-  const navigate = useNavigate();
 
   // Fetch Trade Data
   const fetchData = useCallback(async () => {
@@ -76,86 +74,72 @@ function HomePage() {
   return (
     <>
       <div className="p-3 grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-4 mt-1">
-        <div className="col-span-12 bg-black-dark-200 rounded-md px-4 py-3 shadow-default flex items-center justify-between">
-          <div className="font-bold text-xl text-secondary leading-none">
+        <div className="col-span-12 px-4 py-3 ">
+          <div className="font-bold text-xl mt-1 text-secondary leading-none">
             Good day, {currentUser?.displayName}
           </div>
-          <button
-            className="bg-primary-300 text-black-dark-200 px-4 py-2 rounded-md"
-            onClick={() => navigate("/create_trade_journal")}
-          >
-            Start tracking
-          </button>
+        </div>
+      </div>
+
+      <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        <div className="col-span-1">
+          <Card
+            icon={<GainSVG />}
+            heading="Winning Trades"
+            value={computedData.positiveCount}
+          />
+        </div>
+
+        <div className="col-span-1">
+          <Card
+            icon={<LossSVG />}
+            heading="Lossing Trades"
+            value={computedData.negativeCount}
+          />
+        </div>
+        <div className="col-span-1">
+          <Card
+            icon={<TotalTradesSVG />}
+            heading="Total Trades"
+            value={fetchedData.length}
+          />
+        </div>
+
+        <div className="col-span-1">
+          <Card
+            icon={<PLUS_SVG />}
+            heading="Overall Gain"
+            value={formatNumber(computedData.positiveTotal)}
+          />
+        </div>
+
+        <div className="col-span-1">
+          <Card
+            icon={<MINUS_SVG />}
+            heading="Overall Loss"
+            value={formatNumber(computedData.negativeTotal)}
+          />
+        </div>
+
+        <div className="col-span-1">
+          <Card
+            icon={<RealizedPLSVG />}
+            heading="Realized P&L"
+            value={formatNumber(computedData.combinedTotal)}
+          />
         </div>
       </div>
 
       <div className="p-3 grid grid-cols-1 gap-4 md:grid-cols-12 lg:grid-cols-12 2xl:gap-7.5">
-        {/* First Column: All Cards */}
-        <div className="col-span-12 md:col-span-3 lg:col-span-3 space-y-4">
-          <div className="space-y-4">
-            <Card
-              icon={<GainSVG />}
-              onClickHandler={() => navigate("/all_trade_journal")}
-              heading="Winning Trades"
-              value={computedData.positiveCount}
-            />
-            <Card
-              icon={<LossSVG />}
-              heading="Lossing Trades"
-              onClickHandler={() => navigate("/all_trade_journal")}
-              value={computedData.negativeCount}
-            />
-            <Card
-              icon={<TotalTradesSVG />}
-              heading="Total Trades"
-              onClickHandler={() => navigate("/all_trade_journal")}
-              value={fetchedData.length}
-            />
-          </div>
-          <div className="space-y-4">
-            <Card
-              icon={<PLUS_SVG />}
-              heading="Overall Gain"
-              value={formatNumber(computedData.positiveTotal)}
-            />
-            <Card
-              icon={<MINUS_SVG />}
-              heading="Overall Loss"
-              value={formatNumber(computedData.negativeTotal)}
-            />
-            <Card
-              icon={<RealizedPLSVG />}
-              heading="Realized P&L"
-              value={formatNumber(computedData.combinedTotal)}
-            />
-          </div>
-        </div>
-
-        <div className="col-span-12 md:col-span-5 lg:col-span-5 rounded-md bg-black-dark-200 px-4 py-5  shadow-default sm:px-7.5 flex flex-col">
+        <div className="col-span-12 md:col-span-12 lg:col-span-12 rounded-md bg-black-dark-200 px-4 py-5 shadow-default sm:px-7.5 flex flex-col">
           <CardTitle title="Market Updates" />
-          <div className="h-full overflow-y-auto no-scrollbar">
+          <div className="h-[200px] overflow-y-auto no-scrollbar">
             <UpdateInfoCard />
           </div>
         </div>
-
-        <div className="col-span-12 md:col-span-4 lg:col-span-4 rounded-md bg-black-dark-200 px-4 py-5  shadow-default sm:px-7.5 flex flex-col">
-          <CardTitle title="Market Events" />
-          <EconomicCalendar
-            colorTheme="dark"
-            isTransparent={true}
-            width="100%"
-            showSymbolLogo={false}
-            countryFilter="in"
-          ></EconomicCalendar>
-        </div>
       </div>
 
-      {/* <div className="p-4 grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-4">
-        <div className="col-span-12 bg-black-dark-200 rounded-md px-4 py-5 shadow-default">
-          <CardTitle title="First Row Content" />
-          <p>Content for the first row goes here.</p>
-        </div>
-      </div> */}
+      <AnalyticsPage />
     </>
   );
 }

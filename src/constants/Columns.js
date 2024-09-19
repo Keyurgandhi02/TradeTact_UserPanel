@@ -54,9 +54,11 @@ export const TRADE_TYPE_DROPDOWNS = [
 
 export const TRADE_ANALYSIS_DETAILS_COLUMNS = [
   "Month",
-  "Trades",
+  "Total Trades",
   "Win Trades",
   "Loss Trades",
+  "Win Ratio",
+  "Loss Ratio",
   "Total Gain",
   "Total Bought",
   "Total Sold",

@@ -111,7 +111,7 @@ export const NewsSVG = () => {
 export const TotalTradesSVG = () => {
   return (
     <svg
-      class="w-8 h-8 dark:text-white"
+      class="w-6 h-6 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -131,7 +131,7 @@ export const TotalTradesSVG = () => {
 export const GainSVG = () => {
   return (
     <svg
-      class="w-8 h-8 dark:text-white"
+      class="w-6 h-6 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -153,7 +153,7 @@ export const GainSVG = () => {
 export const LossSVG = () => {
   return (
     <svg
-      class="w-8 h-8 dark:text-white "
+      class="w-6 h-6 dark:text-white "
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -175,7 +175,7 @@ export const LossSVG = () => {
 export const RealizedPLSVG = () => {
   return (
     <svg
-      class="w-8 h-8 dark:text-white "
+      class="w-6 h-6 dark:text-white "
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -641,7 +641,7 @@ export const SEARCH_SVG = () => {
 export const PLUS_SVG = () => {
   return (
     <svg
-      class="w-8 h-8 dark:text-white"
+      class="w-6 h-6 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -663,7 +663,7 @@ export const PLUS_SVG = () => {
 export const MINUS_SVG = () => {
   return (
     <svg
-      class="w-8 h-8 dark:text-white"
+      class="w-6 h-6 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"

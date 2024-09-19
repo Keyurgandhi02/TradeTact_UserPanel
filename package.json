@@ -26,11 +26,13 @@
     "react-apexcharts": "^1.4.1",
     "react-detect-offline": "^2.4.5",
     "react-dom": "^18.2.0",
+    "react-firebase-pagination": "^1.1.16",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "react-ts-tradingview-widgets": "^1.2.5",
     "react-use-websocket": "^4.8.1",
+    "recharts": "^2.12.7",
     "smartapi-javascript": "^1.0.14",
     "web-vitals": "^2.1.4"
   },

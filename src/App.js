@@ -4,7 +4,7 @@ import AuthenticatedLayout from "./components/AuthenticatedLayout";
 import PrivateRoute from "./PrivateRoute";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NotFound404Page from "./pages/NotFound404Page";
-import AnalyticsPage from "./pages/AnalyticsPage";
+import MarketPage from "./pages/MarketPage";
 
 // Lazy-loaded components
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -41,7 +41,7 @@ function App() {
             <Route element={<AuthenticatedLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="*" element={<NotFound404Page />} />
-              <Route path="/analytics" element={<AnalyticsPage />} />
+              <Route path="/market" element={<MarketPage />} />
 
               <Route path="/all_watchlist" element={<WatchlistPage />} />
               <Route

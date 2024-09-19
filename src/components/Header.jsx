@@ -43,9 +43,9 @@ export default function Header() {
         location.pathname === "/edit_return_performance",
     },
     {
-      name: "Analytics",
-      href: "/analytics",
-      current: location.pathname === "/analytics",
+      name: "Market",
+      href: "/market",
+      current: location.pathname === "/market",
     },
     {
       name: "Console",
