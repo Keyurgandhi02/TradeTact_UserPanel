@@ -5,22 +5,24 @@ function StateDataHighlightCard({ highlightCardData, unit }) {
     <div
       className={`flex gap-5 p-8 max-w-max border ${
         highlightCardData?.previous < highlightCardData?.current
-          ? "border-green-500"
-          : "border-red-500"
+          ? "border-main_color"
+          : "border-main_red_color"
       } ${
         highlightCardData?.previous === highlightCardData?.current &&
         "border-gray"
       } rounded-md`}
     >
       <div className="text-center">
-        <h2 className="text-2xl font-bold pb-2 text-primary">
+        <h2 className="text-2xl font-bold pb-2 text-main_color">
           {highlightCardData?.previous} {unit}
         </h2>
-        <h4 className="inline text-gray-500 text-sm">Last Year</h4>
+        <h4 className="inline dark:text-white text-black-dark-300 text-sm">
+          Last Year
+        </h4>
       </div>
       <div>
         <svg
-          className="fill-primary"
+          className="fill-black dark:fill-white"
           version="1.1"
           id="Capa_1"
           x="0px"
@@ -40,10 +42,10 @@ function StateDataHighlightCard({ highlightCardData, unit }) {
         </svg>
       </div>
       <div className="text-center">
-        <h2 className="text-2xl font-bold pb-2 text-primary">
+        <h2 className="text-2xl font-bold pb-2 text-main_color">
           {highlightCardData?.current} {unit}
         </h2>
-        <h4 className="inline text-gray-500 text-sm">This Year</h4>
+        <h4 className="inline dark:text-white text-black-dark-300 text-sm">This Year</h4>
       </div>
     </div>
   );

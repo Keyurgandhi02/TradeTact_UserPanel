@@ -34,7 +34,9 @@ export default StatesData;
 
 export const OtherDataCardHeading = ({ heading }) => {
   return (
-    <div className="p-2 font-semibold text-center text-whiten">{heading}</div>
+    <div className="p-2 font-semibold text-center dark:text-whiten text-black-dark-300 ">
+      {heading}
+    </div>
   );
 };
 
@@ -42,12 +44,12 @@ export const OtherDataCardDetails = ({ value }) => {
   return (
     <div
       className={`border ${
-        value > 0 ? "border-green-500" : "border-red-500"
+        value > 0 ? "border-main_color" : "border-main_red_color"
       } rounded-md text-center py-8 mt-2`}
     >
       <h2
         className={`text-3xl font-bold ${
-          value > 0 ? "text-green-500" : "text-red-500"
+          value > 0 ? "text-main_color" : "text-main_red_color"
         }`}
       >
         {value}

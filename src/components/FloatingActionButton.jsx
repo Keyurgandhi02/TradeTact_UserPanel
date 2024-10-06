@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { GRID_SVG } from "../UI/GlobalSVG";
+import { GRID_SVG } from "../assets/svgIcons";
 import { Link } from "react-router-dom";
+import { TRADE_JOURNAL_ROUTES } from "../constants/routesConstants";
 
 const FloatingActionButton = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -44,7 +45,7 @@ const FloatingActionButton = () => {
         }`}
       >
         <Link
-          to="/all_trade_journal"
+          to={TRADE_JOURNAL_ROUTES.TRADE_JOURNAL_ALL}
           className="absolute right-[-0.5rem] top-5 bg-primary w-36 h-12 rounded-xl flex items-center justify-center text-black-dark-200 font-semibold  hover:bg-secondary transition-all duration-300"
         >
           Journal

@@ -1,111 +1,158 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthenticatedLayout from "./components/AuthenticatedLayout";
-import PrivateRoute from "./PrivateRoute";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
-import NotFound404Page from "./pages/NotFound404Page";
-import MarketPage from "./pages/MarketPage";
-import ManageBrokerAccountsPage from "./pages/ManageBrokerAccountsPage";
-import CreateEditBrokerAccounts from "./components/CreateEditBrokerAccounts";
-import ManageStrategyPage from "./pages/ManageStrategyPage";
-import CreateEditStrategy from "./components/CreateEditStrategy";
-
-// Lazy-loaded components
-const HomePage = lazy(() => import("./pages/HomePage"));
-const ReturnPerformancePage = lazy(() =>
-  import("./pages/ReturnPerformancePage")
-);
-const WatchlistPage = lazy(() => import("./pages/WatchlistPage"));
-const TradeJournalPage = lazy(() => import("./pages/TradeJournalPage"));
-const CreateEditWatchlist = lazy(() =>
-  import("./components/CreateEditWatchlist")
-);
-const CreateEditTradeJournal = lazy(() =>
-  import("./components/CreateEditTradeJournal")
-);
-const CreateEditReturnPerformance = lazy(() =>
-  import("./components/CreateEditReturnPerformance")
-);
-const CreateEditRiskManagement = lazy(() =>
-  import("./components/CreateEditRiskManagement")
-);
-const RegisterPage = lazy(() => import("./pages/RegisterPage"));
-const ProfilePage = lazy(() => import("./pages/ProfilePage"));
-const UpdatesPage = lazy(() => import("./pages/UpdatesPage"));
+import ProtectedRoute from "./utils/ProtectedRoute";
+import {
+  BROKER_ROUTES,
+  GENERAL_ROUTES,
+  MARKET_ROUTES,
+  RISK_MANAGE_ROUTES,
+  ROI_ROUTES,
+  TRADE_JOURNAL_ROUTES,
+  TRADING_STRATEGY_ROUTES,
+  USER_PROFILE_ROUTES,
+  USER_ROUTES,
+  WATCHLIST_ROUTES,
+} from "./constants/routesConstants";
+import {
+  HomePage,
+  NotFound404Page,
+  MarketPage,
+  ProfilePage,
+  UpdatesPage,
+  ResetPasswordPage,
+  RegisterPage,
+  RiskManagementCalculatorPage,
+} from "./pages/index";
+import { WatchlistPage, CreateEditWatchlistPage } from "./pages/watchlist";
+import {
+  TradeJournalPage,
+  CreateEditTradeJournalPage,
+} from "./pages/trade_journal";
+import {
+  CreateEditTradingStrategyPage,
+  TradingStrategyPage,
+} from "./pages/trading_strategy";
+import {
+  ManageBrokerDematAccountsPage,
+  CreateEditBrokerDematAccountsPage,
+} from "./pages/broker_demat";
+import {
+  CreateEditReturnPerformancePage,
+  ReturnPerformancePage,
+} from "./pages/roi";
 
 function App() {
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/auth" element={<RegisterPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route element={<PrivateRoute />}>
+          <Route path={USER_ROUTES.AUTH} element={<RegisterPage />} />
+          <Route
+            path={USER_ROUTES.RESET_PASSWORD}
+            element={<ResetPasswordPage />}
+          />
+          <Route element={<ProtectedRoute />}>
             <Route element={<AuthenticatedLayout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="*" element={<NotFound404Page />} />
-              <Route path="/market" element={<MarketPage />} />
+              {/* General Routes */}
+              <Route path={GENERAL_ROUTES.BLANK} element={<HomePage />} />
+              <Route
+                path={GENERAL_ROUTES.NO_PAGE_FOUND}
+                element={<NotFound404Page />}
+              />
 
-              <Route path="/all_watchlist" element={<WatchlistPage />} />
+              {/* Trade Journal Routes */}
               <Route
-                path="/create_watchlist"
-                element={<CreateEditWatchlist />}
+                path={TRADE_JOURNAL_ROUTES.TRADE_JOURNAL_ALL}
+                element={<TradeJournalPage />}
               />
               <Route
-                path="/edit_watchlist/:id"
-                element={<CreateEditWatchlist />}
-              />
-              <Route path="/all_trade_journal" element={<TradeJournalPage />} />
-              <Route
-                path="/create_trade_journal"
-                element={<CreateEditTradeJournal />}
+                path={TRADE_JOURNAL_ROUTES.TRADE_JOURNAL_CREATE}
+                element={<CreateEditTradeJournalPage />}
               />
               <Route
-                path="/edit_trade_journal/:id"
-                element={<CreateEditTradeJournal />}
+                path={TRADE_JOURNAL_ROUTES.TRADE_JOURNAL_EDIT_ID}
+                element={<CreateEditTradeJournalPage />}
+              />
+
+              {/* Watchlist Routes */}
+              <Route
+                path={WATCHLIST_ROUTES.WATCHLIST_ALL}
+                element={<WatchlistPage />}
               />
               <Route
-                path="/create_risk_management"
-                element={<CreateEditRiskManagement />}
+                path={WATCHLIST_ROUTES.WATCHLIST_CREATE}
+                element={<CreateEditWatchlistPage />}
               />
               <Route
-                path="/all_return_performance"
+                path={WATCHLIST_ROUTES.WATCHLIST_EDIT_ID}
+                element={<CreateEditWatchlistPage />}
+              />
+
+              {/* ROI Routes */}
+              <Route
+                path={ROI_ROUTES.ROI_ALL}
                 element={<ReturnPerformancePage />}
               />
               <Route
-                path="/create_return_performance"
-                element={<CreateEditReturnPerformance />}
+                path={ROI_ROUTES.ROI_CREATE}
+                element={<CreateEditReturnPerformancePage />}
               />
               <Route
-                path="/edit_return_performance/:id"
-                element={<CreateEditReturnPerformance />}
-              />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/updates" element={<UpdatesPage />} />
-              <Route
-                path="/all_broker_accounts"
-                element={<ManageBrokerAccountsPage />}
-              />
-              <Route
-                path="/create_broker_accounts"
-                element={<CreateEditBrokerAccounts />}
-              />
-              <Route
-                path="/edit_broker_accounts/:id"
-                element={<CreateEditBrokerAccounts />}
+                path={ROI_ROUTES.ROI_EDIT_ID}
+                element={<CreateEditReturnPerformancePage />}
               />
 
+              {/* Market Routes */}
               <Route
-                path="/all_user_strategy"
-                element={<ManageStrategyPage />}
+                path={MARKET_ROUTES.MARKET_DATA}
+                element={<MarketPage />}
+              />
+
+              {/* Market Updates Routes */}
+              <Route
+                path={MARKET_ROUTES.MARKET_UPDATES}
+                element={<UpdatesPage />}
+              />
+
+              {/* Risk Management Routes */}
+              <Route
+                path={RISK_MANAGE_ROUTES.RISK_MANAGE_CALCULATOR}
+                element={<RiskManagementCalculatorPage />}
+              />
+
+              {/* User Profile Routes */}
+              <Route
+                path={USER_PROFILE_ROUTES.PROFILE}
+                element={<ProfilePage />}
+              />
+
+              {/* Broker Routes */}
+              <Route
+                path={BROKER_ROUTES.BROKER_ALL}
+                element={<ManageBrokerDematAccountsPage />}
               />
               <Route
-                path="/create_user_strategy"
-                element={<CreateEditStrategy />}
+                path={BROKER_ROUTES.BROKER_CREATE}
+                element={<CreateEditBrokerDematAccountsPage />}
               />
               <Route
-                path="/edit_user_strategy/:id"
-                element={<CreateEditStrategy />}
+                path={BROKER_ROUTES.BROKER_EDIT_ID}
+                element={<CreateEditBrokerDematAccountsPage />}
+              />
+
+              {/* Trading Strategy Routes */}
+              <Route
+                path={TRADING_STRATEGY_ROUTES.TRADING_STRATEGY_ALL}
+                element={<TradingStrategyPage />}
+              />
+              <Route
+                path={TRADING_STRATEGY_ROUTES.TRADING_STRATEGY_CREATE}
+                element={<CreateEditTradingStrategyPage />}
+              />
+              <Route
+                path={TRADING_STRATEGY_ROUTES.TRADING_STRATEGY_EDIT_ID}
+                element={<CreateEditTradingStrategyPage />}
               />
             </Route>
           </Route>

@@ -18,8 +18,8 @@ function GlobalInput({
   };
 
   return (
-    <div className="mb-4.5 text-whiten w-full">
-      <label className="mb-3 block text-sm font-semibold text-whiten">
+    <div className="mb-4.5 text-black-dark-400 dark:text-whiten w-full">
+      <label className="mb-3 block text-sm font-semibold text-black-dark-400 dark:text-whiten">
         {placeholder}
       </label>
       <input
@@ -30,10 +30,10 @@ function GlobalInput({
         onChange={handleChange}
         style={{ MozAppearance: "textfield" }}
         onWheel={handleWheel}
-        className="w-full rounded border-[1.5px] border-black-dark-300 bg-transparent px-5 py-3 font-normal text-whiten outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-black-dark-300 disabled:border-none dark:focus:border-primary"
+        className="dark:placeholder-white placeholder-black-dark-400 w-full rounded bg-transparent border-[1.2px] border-gray-500 px-5 py-3 font-normal text-black-dark-400 dark:text-whiten outline-none transition focus:border-main_color active:border-main_color disabled:cursor-default disabled:bg-black-dark-300 disabled:border-none dark:focus:border-main_color"
       />
       {errors && (
-        <span className="text-red-500 text-xs my-3 block">{errors}</span>
+        <span className="text-main_red_color text-xs my-3 block">{errors}</span>
       )}
     </div>
   );

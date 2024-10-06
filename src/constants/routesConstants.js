@@ -1,0 +1,67 @@
+// GENERAL ROUTES
+export const GENERAL_ROUTES = {
+  BLANK: "/",
+  NO_PAGE_FOUND: "*",
+};
+
+// USER ROUTES
+export const USER_ROUTES = {
+  AUTH: "/auth",
+  RESET_PASSWORD: "/reset-password",
+};
+
+// TRADE JOURNAL ROUTES
+export const TRADE_JOURNAL_ROUTES = {
+  TRADE_JOURNAL_ALL: "/trade_journal/all",
+  TRADE_JOURNAL_CREATE: "/trade_journal/create",
+  TRADE_JOURNAL_EDIT_ID: "/trade_journal/edit/:id",
+  TRADE_JOURNAL_EDIT: "/trade_journal/edit",
+};
+
+// WATCHLIST ROUTES
+export const WATCHLIST_ROUTES = {
+  WATCHLIST_ALL: "/watchlist/all",
+  WATCHLIST_CREATE: "/watchlist/create",
+  WATCHLIST_EDIT_ID: "/watchlist/edit/:id",
+  WATCHLIST_EDIT: "/watchlist/edit",
+};
+
+// ROI ROUTES
+export const ROI_ROUTES = {
+  ROI_ALL: "/roi/all",
+  ROI_CREATE: "/roi/create",
+  ROI_EDIT_ID: "/roi/edit/:id",
+  ROI_EDIT: "/roi/edit",
+};
+
+// MARKET ROUTES
+export const MARKET_ROUTES = {
+  MARKET_DATA: "/market",
+  MARKET_UPDATES: "/updates",
+};
+
+// RISK MANAGEMENT ROUTES
+export const RISK_MANAGE_ROUTES = {
+  RISK_MANAGE_CALCULATOR: "/risk_management_calculator",
+};
+
+// USER PROFILE ROUTES
+export const USER_PROFILE_ROUTES = {
+  PROFILE: "/profile",
+};
+
+// BROKER ROUTES
+export const BROKER_ROUTES = {
+  BROKER_ALL: "/broker/all",
+  BROKER_CREATE: "/broker/create",
+  BROKER_EDIT_ID: "/broker/edit/:id",
+  BROKER_EDIT: "/broker/edit",
+};
+
+// TRADING STRATEGY ROUTES
+export const TRADING_STRATEGY_ROUTES = {
+  TRADING_STRATEGY_ALL: "/trading_strategy/all",
+  TRADING_STRATEGY_CREATE: "/trading_strategy/create",
+  TRADING_STRATEGY_EDIT_ID: "/trading_strategy/edit/:id",
+  TRADING_STRATEGY_EDIT: "/trading_strategy/edit",
+};

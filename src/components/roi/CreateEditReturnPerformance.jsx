@@ -1,0 +1,283 @@
+import React, { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useLoading } from "../../context/LoadingContext";
+import {
+  addFirebaseData,
+  getFirebaseData,
+  getFirebaseDataById,
+  updateFirebaseData,
+} from "../../config/firestoreOperations";
+import { FIREBASE_ENDPOINTS } from "../../constants/apiConstants";
+import { validateAllFields } from "../../config/validationUtils";
+import { roiValidationRules } from "../../config/validations";
+import {
+  GENERAL_ADD_SUCCESS,
+  GENERAL_FETCH_ERROR,
+  GENERAL_FORM_VALIDATIONS_ERROR,
+  GENERAL_SUBMIT_ERROR,
+  ROI_PAGE_STRINGS,
+  TRADE_SETTINGS_NO_ERROR,
+} from "../../constants/Strings";
+import { ROI_ROUTES } from "../../constants/routesConstants";
+import PageHeading from "../PageHeading";
+import GlobalInput from "../GlobalInput";
+import GlobalDropdown from "../GlobalDropdown";
+import GlobalButton from "../GlobalButton";
+import GloablInfo from "../GloablInfo";
+import FloatButton from "../FloatButton";
+import { LIST_FLOAT_SVG } from "../../assets/svgIcons";
+
+const initialState = {
+  created_at: "",
+  accountName: "",
+  invested_amount: "",
+  returned_amount: "",
+  charges: "",
+};
+
+function CreateEditReturnPerformance() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const [formData, setFormData] = useState(initialState);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [errors, setErrors] = useState({});
+  const { startLoading, stopLoading } = useLoading();
+  const [isViewModal, setViewModal] = useState(false);
+  const [isDisable, setDisable] = useState(false);
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (!id) return;
+      setIsEditMode(true);
+      try {
+        const fetchedTasks = await getFirebaseDataById(
+          FIREBASE_ENDPOINTS.MASTER_DATA,
+          currentUser.uid,
+          FIREBASE_ENDPOINTS.USER_ROI,
+          id
+        );
+        setFormData(fetchedTasks);
+      } catch (error) {
+        toast.error("Error fetching data");
+      }
+    }
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  // Input Change Handler
+  const handleChange = (name, value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // Dropdown Select Handler
+  const selectDropDownHandler = (name, value) => {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Form Submit Handler
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { invested_amount, returned_amount } = formData;
+    const investmentNum = parseFloat(invested_amount);
+    const returnAmountNum = parseFloat(returned_amount);
+
+    const roiResult = ((returnAmountNum - investmentNum) / investmentNum) * 100;
+    const returnAmount = returnAmountNum - investmentNum;
+    const data = {
+      ...formData,
+      returnPercentage: roiResult,
+      returnAmount,
+    };
+
+    const modifiedData = {};
+    let hasChanges = false;
+
+    Object.keys(data).forEach((key) => {
+      if (data[key] !== initialState[key]) {
+        modifiedData[key] = data[key];
+        hasChanges = true;
+      }
+    });
+
+    const validationErrors = validateAllFields(
+      isEditMode ? modifiedData : data,
+      roiValidationRules
+    );
+
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      toast.error(GENERAL_FORM_VALIDATIONS_ERROR);
+      return;
+    }
+
+    try {
+      if (isEditMode && hasChanges) {
+        await updateFirebaseData(
+          FIREBASE_ENDPOINTS.MASTER_DATA,
+          currentUser.uid,
+          FIREBASE_ENDPOINTS.USER_ROI,
+          id,
+          modifiedData
+        );
+      } else if (!isEditMode) {
+        await addFirebaseData(
+          FIREBASE_ENDPOINTS.MASTER_DATA,
+          currentUser.uid,
+          FIREBASE_ENDPOINTS.USER_ROI,
+          data
+        );
+        toast.success(GENERAL_ADD_SUCCESS);
+      }
+
+      setFormData(initialState);
+      navigate(ROI_ROUTES.ROI_ALL);
+    } catch (error) {
+      toast.error(GENERAL_SUBMIT_ERROR);
+    }
+  };
+
+  // Float Button Handler
+  const onFloatBtnClickHandler = () => {
+    navigate(ROI_ROUTES.ROI_ALL);
+  };
+
+  useEffect(() => {
+    const fetchOptions = async () => {
+      try {
+        const fetchedOptions = await getFirebaseData(
+          FIREBASE_ENDPOINTS.MASTER_DATA,
+          currentUser.uid,
+          FIREBASE_ENDPOINTS.USER_MANAGE_DEMAT,
+          startLoading,
+          stopLoading,
+          "desc",
+          "doc_created_At"
+        );
+
+        if (!fetchedOptions.length) {
+          setViewModal(true);
+          setDisable(true);
+        } else {
+          setOptions(fetchedOptions);
+        }
+      } catch (error) {
+        setDisable(true);
+        toast.error(GENERAL_FETCH_ERROR);
+      }
+    };
+
+    fetchOptions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser.uid]);
+
+  return (
+    <div className="md:mb-0 mb-12">
+      {!isViewModal && (
+        <div className="flex flex-col gap-9 p-4 mt-5 mb-5">
+          <PageHeading
+            title={
+              isEditMode ? ROI_PAGE_STRINGS?.editRoi : ROI_PAGE_STRINGS?.addRoi
+            }
+          />
+
+          <form onSubmit={handleSubmit}>
+            <div className="p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
+                <GlobalInput
+                  inputType="month"
+                  placeholder="Date"
+                  isValue={formData?.created_at}
+                  name="created_at"
+                  errors={errors?.created_at}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                />
+
+                <GlobalDropdown
+                  options={options}
+                  formData={formData?.label}
+                  selectDropDownHandler={selectDropDownHandler}
+                  name="accountName"
+                  label="Select Account"
+                  errors={errors?.accountName}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Amount Invested"
+                  isValue={formData?.invested_amount}
+                  name="invested_amount"
+                  errors={errors?.invested_amount}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                />
+
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Amount Returned"
+                  isValue={formData?.returned_amount}
+                  name="returned_amount"
+                  errors={errors?.returned_amount}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mb-2">
+                <GlobalInput
+                  inputType="number"
+                  placeholder="Total Charges"
+                  isValue={formData?.charges}
+                  onChangeHandler={(name, value) => handleChange(name, value)}
+                  name="charges"
+                  errors={errors?.charges}
+                  disabledStatus={false}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-5">
+                <GlobalButton
+                  btnTitle={isEditMode ? "Update Returns" : "Add Returns"}
+                  disabled={isDisable}
+                  type="submit"
+                  bgColor="bg-primary"
+                  textColor=""
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      )}
+      <Toaster position="top-right" reverseOrder={true} />
+
+      {isViewModal && (
+        <GloablInfo
+          firstTitle="Oopss!!"
+          secondTitle="Trade Setting Required"
+          desc={TRADE_SETTINGS_NO_ERROR}
+          linktitle="Go to Console"
+          link="/create_demat_accounts"
+        />
+      )}
+
+      <FloatButton
+        onClickHandler={onFloatBtnClickHandler}
+        icon={<LIST_FLOAT_SVG />}
+      />
+    </div>
+  );
+}
+
+export default CreateEditReturnPerformance;

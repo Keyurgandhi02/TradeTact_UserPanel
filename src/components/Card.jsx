@@ -1,25 +1,20 @@
 import React from "react";
 
-function Card({ icon, value, heading }) {
+function Card({ value, heading }) {
   return (
-    <div className="relative flex flex-col min-w-0 mb-6 break-words bg-black-dark-400 shadow-soft-xl rounded-sm bg-clip-border">
+    <div className="relative flex flex-col min-w-0 mb-6 break-words border-[0.6px] border-gray-500 shadow-soft-xl rounded-sm bg-clip-border">
       <div className="flex-auto p-5">
         <div className="flex flex-wrap -mx-3">
           <div className="flex-none max-w-full px-3 h-20 sm:h-22">
             <div className="mt-2">
-              <p className="mb-4 font-sans font-semibold leading-normal text-md text-whiten">
+              <p className="mb-4 font-sans font-semibold leading-normal text-md text-black-dark-200 dark:text-whiten ">
                 {heading}
               </p>
-              <h5 className="mb-0 font-bold text-primary mt-1 text-xl">
+              <h5 className="mb-0 font-bold text-main_color mt-1 text-xl">
                 {value}
               </h5>
             </div>
           </div>
-          {/* <div className="w-4/10 max-w-full  ml-auto text-right flex-0">
-            <div className="inline-block items-center justify-center w-10 h-10">
-              <div className="text-lg text-center text-secondary">{icon}</div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

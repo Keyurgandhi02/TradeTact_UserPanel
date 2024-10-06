@@ -1,3 +1,6 @@
+export const APP = {
+  name: "TradeTact",
+};
 export const GENERAL_FETCH_ERROR = "An error occurred while Fetching Data!";
 export const GENERAL_DELETE_ERROR = "An error occurred while Deleting Data!";
 export const GENERAL_DELETE_SUCCESS = "Data Deleted Successfully!";

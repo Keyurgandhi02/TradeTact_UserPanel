@@ -5,7 +5,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { CLOSE_SVG } from "../UI/GlobalSVG";
+import { CLOSE_SVG } from "../assets/svgIcons";
 
 export default function ModalDialog({ isOpen, onClose, children }) {
   return (

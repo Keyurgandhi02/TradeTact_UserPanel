@@ -6,7 +6,7 @@ import GlobalInput from "../components/GlobalInput";
 import { resetPasswordValidationRules } from "../config/validations";
 import { validateAllFields } from "../config/validationUtils";
 import { GENERAL_FORM_VALIDATIONS_ERROR } from "../constants/Strings";
-import { useAuth } from "../store/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const initialState = {
   email: "",

@@ -1,0 +1,142 @@
+import { Link, useLocation } from "react-router-dom";
+import { HeaderNavItem, HeaderPopover, MobileHeader } from "./index";
+import { useAuth } from "../../context/AuthContext";
+import { Disclosure, DisclosureButton } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  BROKER_ROUTES,
+  GENERAL_ROUTES,
+  MARKET_ROUTES,
+  ROI_ROUTES,
+  TRADE_JOURNAL_ROUTES,
+  TRADING_STRATEGY_ROUTES,
+  USER_PROFILE_ROUTES,
+  WATCHLIST_ROUTES,
+} from "../../constants/routesConstants";
+import { APP_LOGO } from "../../assets/svgIcons";
+import { APP } from "../../constants/Strings";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
+
+export default function Header() {
+  const { logout, currentUser } = useAuth();
+  const location = useLocation();
+  const { toggleTheme, theme } = useContext(ThemeContext);
+
+  // Header Nav List
+  const headerNavList = [
+    {
+      name: "Dashboard",
+      href: GENERAL_ROUTES.BLANK,
+      current: location.pathname === GENERAL_ROUTES.BLANK,
+    },
+    {
+      name: "Journal",
+      href: TRADE_JOURNAL_ROUTES.TRADE_JOURNAL_ALL,
+      current:
+        location.pathname === TRADE_JOURNAL_ROUTES.TRADE_JOURNAL_ALL ||
+        location.pathname === TRADE_JOURNAL_ROUTES.TRADE_JOURNAL_CREATE ||
+        location.pathname === TRADE_JOURNAL_ROUTES.TRADE_JOURNAL_EDIT,
+    },
+    {
+      name: "Watchlist",
+      href: WATCHLIST_ROUTES.WATCHLIST_ALL,
+      current:
+        location.pathname === WATCHLIST_ROUTES.WATCHLIST_ALL ||
+        location.pathname === WATCHLIST_ROUTES.WATCHLIST_CREATE ||
+        location.pathname === WATCHLIST_ROUTES.WATCHLIST_EDIT,
+    },
+    {
+      name: "Returns",
+      href: ROI_ROUTES.ROI_ALL,
+      current:
+        location.pathname === ROI_ROUTES.ROI_ALL ||
+        location.pathname === ROI_ROUTES.ROI_CREATE ||
+        location.pathname === ROI_ROUTES.ROI_EDIT,
+    },
+    {
+      name: "Market",
+      href: MARKET_ROUTES.MARKET_DATA,
+      current: location.pathname === MARKET_ROUTES.MARKET_DATA,
+    },
+  ];
+
+  // Header Popover Nav List
+  const headerPopoverNavList = [
+    {
+      name: "Profile",
+      href: USER_PROFILE_ROUTES.PROFILE,
+    },
+    {
+      name: "Demat & Broker",
+      href: BROKER_ROUTES.BROKER_ALL,
+    },
+    {
+      name: "Trading Strategy",
+      href: TRADING_STRATEGY_ROUTES.TRADING_STRATEGY_ALL,
+    },
+    {
+      name: "Help & Support",
+      href: GENERAL_ROUTES.BLANK,
+    },
+  ];
+
+  // Join Class When Active Menu
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
+
+  return (
+    <Disclosure
+      as="nav"
+      className="bg-white dark:bg-black top-0 sticky z-50 shadow-sm dark:shadow-black-dark-500 dark:shadow-sm"
+    >
+      <div className="mx-auto px-4 sm:px-4 lg:px-10">
+        <div className="relative flex h-16 items-center justify-between">
+          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            {/* Mobile menu button*/}
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black">
+              <Bars3Icon
+                aria-hidden="true"
+                className="block h-6 w-6 group-data-[open]:hidden"
+              />
+              <XMarkIcon
+                aria-hidden="true"
+                className="hidden h-6 w-6 group-data-[open]:block"
+              />
+            </DisclosureButton>
+          </div>
+          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div className="flex flex-shrink-0 items-center">
+              <Link to={GENERAL_ROUTES.BLANK}>
+                <img alt={APP.name} src={APP_LOGO} className="h-9 w-auto" />
+              </Link>
+            </div>
+            <div className="hidden sm:ml-8 sm:block">
+              <div className="flex space-x-4  ">
+                {headerNavList.map((item) => (
+                  <HeaderNavItem
+                    key={item.name}
+                    item={item}
+                    classes={classNames}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <HeaderPopover
+              logout={logout}
+              navigation={headerPopoverNavList}
+              toggleTheme={toggleTheme}
+              theme={theme}
+              currentUser={currentUser}
+            />
+          </div>
+        </div>
+      </div>
+      <MobileHeader classes={classNames} navigation={headerNavList} />
+    </Disclosure>
+  );
+}

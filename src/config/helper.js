@@ -128,7 +128,7 @@ export const renderActiveShape = (props) => {
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
         textAnchor={textAnchor}
-        fill="#fff"
+        fill="#06d6a0"
         fontSize={16}
       >{`${value} Trade`}</text>
       <text

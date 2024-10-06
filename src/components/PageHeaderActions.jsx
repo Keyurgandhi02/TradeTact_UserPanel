@@ -1,5 +1,5 @@
 import React from "react";
-import { DOWNLOAD_SVG } from "../UI/GlobalSVG";
+import { DOWNLOAD_SVG } from "../assets/svgIcons";
 import ActionsButton from "./ActionsButton";
 import SearchBar from "./SearchBar";
 

@@ -2,8 +2,8 @@ import { format, parseISO } from "date-fns";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { getFirebaseData } from "../config/firestoreOperations";
 import { FIREBASE_ENDPOINTS } from "../constants/apiConstants";
-import { useAuth } from "../store/AuthContext";
-import { useLoading } from "../store/LoadingContext";
+import { useAuth } from "../context/AuthContext";
+import { useLoading } from "../context/LoadingContext";
 import { formatNumber, renderActiveShape } from "../config/helper";
 import LongCard from "../components/LongCard";
 import LongCardItem from "../components/LongCardItem";
@@ -213,7 +213,7 @@ function AnalyticsPage() {
       {fetchedData.length > 0 && (
         <>
           <div className="mt-1 px-3 grid grid-cols-1 gap-2 md:grid-cols-12 md:mt-6 2xl:mt-7.5 2xl:gap-4.5">
-            <div className="col-span-12 md:col-span-8 rounded-sm bg-black-dark-400 px-3 py-5 shadow-default sm:px-5.5">
+            <div className="col-span-12 md:col-span-8 rounded-sm border-[0.6px] border-gray-500 bg-transparent px-3 py-5 shadow-default sm:px-5.5">
               <CardTitle title="Trade Analysis" />
               <ResponsiveContainer width="100%" height={400}>
                 <AreaChart data={computedData.chartData}>
@@ -221,7 +221,7 @@ function AnalyticsPage() {
                   <XAxis
                     dataKey="date"
                     tickFormatter={(date) => format(new Date(date), "dd/MM/yy")}
-                    tick={{ fill: "#fff" }}
+                    tick={{ fill: "#06d6a0" }}
                     dy={10}
                   />
                   <Legend
@@ -246,9 +246,9 @@ function AnalyticsPage() {
               </ResponsiveContainer>
             </div>
 
-            <div className="col-span-12 md:col-span-4 rounded-sm bg-black-dark-400 px-3 py-5 shadow-default sm:px-5.5">
+            <div className="col-span-12 md:col-span-4 rounded-sm border-[0.6px] border-gray-500 bg-transparent px-3 py-5 shadow-default sm:px-5.5">
               <CardTitle title="Trade User Analysis" />
-              <div className="border-b mb-5 border-black-dark-300"></div>
+              <div className="border-b mb-5 dark:border-black-dark-300 border-gray-500"></div>
               <ResponsiveContainer width="100%" height={400}>
                 <PieChart>
                   <Pie
@@ -277,7 +277,7 @@ function AnalyticsPage() {
           </div>
 
           <div className="mt-1 px-3 grid grid-cols-1 gap-2 md:grid-cols-12 md:mt-6 2xl:mt-7.5 2xl:gap-4.5">
-            <div className="col-span-12 md:col-span-12 rounded-sm bg-black-dark-400 px-3 py-5 shadow-default sm:px-5.5">
+            <div className="col-span-12 md:col-span-12 rounded-sm border-[0.6px] border-gray-500 bg-transparent px-3 py-5 shadow-default sm:px-5.5">
               <CardTitle title="Trade Details Analysis" />
               <div className="h-100 overflow-y-auto no-scrollbar">
                 {rowsData.map((item, i) => (
@@ -334,7 +334,7 @@ function AnalyticsPage() {
           </div>
 
           <div className="mt-1 px-3 grid grid-cols-1 gap-2 md:grid-cols-12 md:mt-6 2xl:mt-7.5 2xl:gap-4.5 mb-5">
-            <div className="col-span-12 md:col-span-12 rounded-sm bg-black-dark-400 px-3 py-5 shadow-default sm:px-5.5">
+            <div className="col-span-12 md:col-span-12 rounded-sm border-[0.6px] border-gray-500 bg-transparent px-3 py-5 shadow-default sm:px-5.5">
               <CardTitle title="All Accounts Trade Analysis" />
               <div className="h-100 overflow-y-auto no-scrollbar">
                 {rowsData1.map((item, i) => (

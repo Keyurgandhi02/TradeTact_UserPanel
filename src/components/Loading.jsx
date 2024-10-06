@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoading } from "../store/LoadingContext";
+import { useLoading } from "../context/LoadingContext";
 
 function Loading() {
   const { isLoading } = useLoading();

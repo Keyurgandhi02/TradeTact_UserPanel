@@ -25,13 +25,18 @@ function UpdateInfoCard() {
   }, []);
 
   return (
-    <ul className="p-1 divide-y divide-black-dark-300">
+    <ul className="divide-y-[0.3px] divide-gray-500">
       {fetchedData?.map((item) => (
-        <li key={item?.id} className="flex justify-between gap-x-6 py-2">
+        <li
+          key={item?.id}
+          className="flex justify-between gap-x-6 py-4 hover:bg-light_hover_color  dark:hover:bg-black-dark-200"
+        >
           <div className="container px-2 py-2">
             <div className="p-2">
-              <h2 className="text-md font-bold text-whiten">{item?.heading}</h2>
-              <p className="text-gray-500 mt-2 text-xs">
+              <h2 className="text-md font-bold text-black-dark-400 dark:text-whiten">
+                {item?.heading}
+              </h2>
+              <p className="text-gray-600 mt-2 text-xs font-semibold">
                 {item?.icon === "positive" ? (
                   <span className="text-green-400">Positive</span>
                 ) : (
