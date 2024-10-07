@@ -46,85 +46,85 @@ function CreateEditBrokerDematAccounts() {
     {
       id: "angelone_one",
       label: "Angel One",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/AngelOne.png?alt=media&token=25b2a00d-6de9-44ba-8035-617d57d91210",
+      icon: process.env.REACT_APP_FIREBASE_ANGELONE_LOGO_URL,
     },
     {
       id: "zerodha_one",
       label: "Zerodha",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/kite.png?alt=media&token=7e1395ed-2f82-49d3-8fab-7b243ad4f131",
+      icon: process.env.REACT_APP_FIREBASE_ZERODHA_LOGO_URL,
     },
     {
       id: "dhan_one",
       label: "Dhan",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/d.jpg?alt=media&token=af91104b-4ee0-4010-be6c-a6ac178991fe",
+      icon: process.env.REACT_APP_FIREBASE_DHAN_LOGO_URL,
     },
 
     {
       id: "hdfcsecurities_one",
       label: "HDFC Securities",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/HDFC.png?alt=media&token=e8c1c8a6-457a-4e41-b72e-c96ae4b4658a",
+      icon: process.env.REACT_APP_FIREBASE_HDFC_LOGO_URL,
     },
 
     {
       id: "kotakneo_one",
       label: "Kotak Neo",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/Kotak.png?alt=media&token=27263266-1848-4d0d-9679-cc8b80bb69e4",
+      icon: process.env.REACT_APP_FIREBASE_KOTAK_LOGO_URL,
     },
 
     {
       id: "sharekhan_one",
       label: "ShareKhan",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/Sharekhan.png?alt=media&token=7be21936-3328-4f58-ad68-84a39e9d82b9",
+      icon: process.env.REACT_APP_FIREBASE_SHAREKHAN_LOGO_URL,
     },
     {
       id: "groww_one",
       label: "Groww",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/Grow.png?alt=media&token=2bad3964-5232-4b44-b088-048bcbb4a370",
+      icon: process.env.REACT_APP_FIREBASE_GROWW_LOGO_URL,
     },
     {
       id: "axisdirect_one",
       label: "Axis Direct",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/Axis.png?alt=media&token=1fe8ba89-d7c0-4bec-aee4-2be889efda8b",
+      icon: process.env.REACT_APP_FIREBASE_AXIS_LOGO_URL,
     },
     {
       id: "upstox_one",
       label: "Upstox",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/Upstox.png?alt=media&token=08b1b2d3-4b08-4e43-b593-105d064589b3",
+      icon: process.env.REACT_APP_FIREBASE_UPSTOX_LOGO_URL,
     },
     {
       id: "fyers_one",
       label: "Fyers",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/Fyers.png?alt=media&token=385bf0e5-b0e6-4777-94b8-730ce3de47de",
+      icon: process.env.REACT_APP_FIREBASE_FYERS_LOGO_URL,
     },
     {
       id: "5paisa_one",
       label: "5 Paisa",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/5Paisa.png?alt=media&token=2614bb79-62c1-4242-9752-f28a1f165d3c",
+      icon: process.env.REACT_APP_FIREBASE_5PAISA_LOGO_URL,
     },
     {
       id: "icicidirect_one",
       label: "ICICI Direct",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/ICICI.jpg?alt=media&token=aa46532b-a6f1-495b-974d-136b256c53bc",
+      icon: process.env.REACT_APP_FIREBASE_ICICI_LOGO_URL,
     },
     {
       id: "iifl_one",
       label: "IIFL",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/IIFL.png?alt=media&token=ab26ba19-a0e0-49f9-a2cb-61ba7529d617",
+      icon: process.env.REACT_APP_FIREBASE_IIFL_LOGO_URL,
     },
     {
       id: "paytmmoney_one",
       label: "Paytm Money",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/Paytm.png?alt=media&token=af3e0b37-f57b-42f4-aab4-653c265c1405",
+      icon: process.env.REACT_APP_FIREBASE_PAYTM_MONEY_LOGO_URL,
     },
     {
       id: "sbisecurities_one",
       label: "SBI Securities",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/SBI.png?alt=media&token=78888574-1920-4886-ba17-61ec613877d6",
+      icon: process.env.REACT_APP_FIREBASE_SBI_LOGO_URL,
     },
     {
       id: "smcglobal_one",
       label: "Smc Global",
-      icon: "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/SMCGLOBAL.png?alt=media&token=903c2804-dbf4-425c-90ea-bdfb12905827",
+      icon: process.env.REACT_APP_FIREBASE_SMC_GLOBAL_LOGO_URL,
     },
   ]);
 

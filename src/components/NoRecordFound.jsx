@@ -18,7 +18,7 @@ function NoRecordFound({
         className={` ${
           isSmallSize ? "w-24 h-24" : "w-55 h-55"
         } mx-auto dark:text-gray text-black-dark-300`}
-        src="https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/undraw_no_data_re_kwbl.svg?alt=media&token=015945c1-3372-4968-9ffe-941a3cb5b37b"
+        src={process.env.REACT_APP_FIREBASE_APP_NO_RECORD_IMAGE_URL}
         alt="No Record Found"
       />
       <h3

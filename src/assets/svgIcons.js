@@ -1,8 +1,6 @@
-export const APP_LOGO =
-  "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/TradeTactLogo.png?alt=media&token=8991962c-b53e-4f88-9365-b45957a62daa";
-
+export const APP_LOGO = process.env.REACT_APP_FIREBASE_APP_LOGO_URL;
 export const APP_USER_AVATAR =
-  "https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/3d-illustration-business-man-with-glasses-grey-background-clipping-path.jpg?alt=media&token=8aa66837-fbda-4e44-96f0-269064d19af5";
+  process.env.REACT_APP_FIREBASE_APP_USER_AVATAR_URL;
 
 export const DROPDOWN_SVG = () => {
   return (

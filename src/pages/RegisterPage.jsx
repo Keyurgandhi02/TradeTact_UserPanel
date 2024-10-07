@@ -166,8 +166,7 @@ function RegisterPage() {
           <div
             className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
             style={{
-              backgroundImage:
-                "url('https://firebasestorage.googleapis.com/v0/b/smk24-6f0bf.appspot.com/o/auth_illustration.svg?alt=media&token=8033a712-4705-440c-8f03-9e0ae0351844')",
+              backgroundImage: `url(${process.env.REACT_APP_FIREBASE_APP_REGISTER_IMAGE_URL})`,
             }}
           ></div>
         </div>
