@@ -83,3 +83,42 @@ export const TRADE_FILTERS_DROPDOWNS = [
     label: "Loss",
   },
 ];
+
+export const TRADE_TIME_INTERVAL_DROPDOWNS = [
+  {
+    id: 1,
+    label: "3 Min",
+  },
+  {
+    id: 2,
+    label: "5 Min",
+  },
+  {
+    id: 3,
+    label: "10 Min",
+  },
+  {
+    id: 4,
+    label: "15 Min",
+  },
+  {
+    id: 5,
+    label: "30 Min",
+  },
+  {
+    id: 6,
+    label: "Hourly",
+  },
+  {
+    id: 7,
+    label: "Daily",
+  },
+  {
+    id: 8,
+    label: "Weekely",
+  },
+  {
+    id: 9,
+    label: "Monthly",
+  },
+];

@@ -7,7 +7,7 @@ import RegisterPage from "./RegisterPage";
 import ResetPasswordPage from "./ResetPasswordPage";
 import UpdatesPage from "./UpdatesPage";
 import RiskManagementCalculatorPage from "./RiskManagementCalculatorPage";
-
+import ContactPage from "./ContactPage";
 export {
   HomePage,
   AnalyticsPage,
@@ -18,4 +18,5 @@ export {
   ResetPasswordPage,
   RegisterPage,
   RiskManagementCalculatorPage,
+  ContactPage,
 };

@@ -5,6 +5,7 @@ import { Disclosure, DisclosureButton } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import {
   BROKER_ROUTES,
+  CONTACT_US_ROUTES,
   GENERAL_ROUTES,
   MARKET_ROUTES,
   ROI_ROUTES,
@@ -77,7 +78,7 @@ export default function Header() {
     },
     {
       name: "Help & Support",
-      href: GENERAL_ROUTES.BLANK,
+      href: CONTACT_US_ROUTES.CONTACT,
     },
   ];
 

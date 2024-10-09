@@ -50,6 +50,11 @@ export const USER_PROFILE_ROUTES = {
   PROFILE: "/profile",
 };
 
+// CONTACT ROUTES
+export const CONTACT_US_ROUTES = {
+  CONTACT: "/help",
+};
+
 // BROKER ROUTES
 export const BROKER_ROUTES = {
   BROKER_ALL: "/broker/all",

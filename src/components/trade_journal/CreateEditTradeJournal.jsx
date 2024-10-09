@@ -26,7 +26,10 @@ import { validateAllFields } from "../../config/validationUtils.js";
 import { tradeJournalValidationRules } from "../../config/validations.js";
 import { TRADE_JOURNAL_ROUTES } from "../../constants/routesConstants.js";
 import GlobalDropdown from "../GlobalDropdown.jsx";
-import { TRADE_TYPE_DROPDOWNS } from "../../constants/Columns.js";
+import {
+  TRADE_TIME_INTERVAL_DROPDOWNS,
+  TRADE_TYPE_DROPDOWNS,
+} from "../../constants/Columns.js";
 import GlobalTextArea from "../GlobalTextArea";
 import GloablInfo from "../GloablInfo";
 
@@ -48,6 +51,7 @@ const initialState = {
   trade_type: "",
   broker: "",
   dematUser: "",
+  trade_time_interval: "",
 };
 
 function CreateEditTradeJournal() {
@@ -65,6 +69,7 @@ function CreateEditTradeJournal() {
   const [selectedDematUser, setSelectedDematUser] = useState("");
   const [selectedStrategy, setSelectedStrategy] = useState("");
   const [selectedTradeType, setSelectedTradeType] = useState("");
+  const [selectedTradeTimeInterval, setSelectedTimeInterval] = useState("");
   const [selectedConsoleData, setSelectedConsoleData] = useState("");
   const [consoleDataOptions, setConsoleDataOptions] = useState([]);
   const [isBrokerCount, setBrokerCount] = useState(0);
@@ -155,6 +160,15 @@ function CreateEditTradeJournal() {
     setFormData((prevFormData) => ({
       ...prevFormData,
       trade_type: tradeTyeData,
+    }));
+  };
+
+  // Trade Type Dropdown Handler
+  const handleTradeTimeIntervalChange = (interval) => {
+    setSelectedTimeInterval(interval);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      trade_time_interval: interval,
     }));
   };
 
@@ -269,7 +283,7 @@ function CreateEditTradeJournal() {
 
           <form onSubmit={handleSubmit}>
             <div className="p-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mb-2">
                 <GlobalInput
                   inputType="text"
                   placeholder="Script Name"
@@ -278,6 +292,9 @@ function CreateEditTradeJournal() {
                   errors={errors?.scriptName}
                   onChangeHandler={(name, value) => handleChange(name, value)}
                 />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-2">
                 <GlobalInput
                   inputType="date"
                   placeholder="Transaction Date"
@@ -286,9 +303,7 @@ function CreateEditTradeJournal() {
                   errors={errors?.buyDate}
                   onChangeHandler={(name, value) => handleChange(name, value)}
                 />
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
                 <GlobalDropdown
                   formData={formData?.dematUser}
                   errors={errors?.dematUser}
@@ -342,7 +357,7 @@ function CreateEditTradeJournal() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-2">
                 <GlobalDropdown
                   formData={formData?.strategyName}
                   errors={errors?.strategyName}
@@ -370,6 +385,32 @@ function CreateEditTradeJournal() {
                 />
 
                 <GlobalDropdown
+                  formData={formData?.trade_time_interval}
+                  label="Time Interval"
+                  children={
+                    <select
+                      className="bg-transparent relative z-2 w-full appearance-none rounded border-[1.2px] border-gray-500 text-black-dark-400 dark:text-whiten px-5 py-3 outline-none transition focus:border-main_color active:border-main_color"
+                      onChange={(e) =>
+                        handleTradeTimeIntervalChange(e.target.value)
+                      }
+                      value={selectedTradeTimeInterval}
+                    >
+                      <option value="" disabled>
+                        Select Time Interval
+                      </option>
+                      {TRADE_TIME_INTERVAL_DROPDOWNS?.map((item) => (
+                        <option
+                          key={item.id}
+                          value={item.label}
+                          className="text-whiten"
+                        >
+                          {item.label}
+                        </option>
+                      ))}
+                    </select>
+                  }
+                />
+                <GlobalDropdown
                   formData={formData?.trade_type}
                   errors={errors?.trade_type}
                   label="Trade Type"
@@ -396,7 +437,7 @@ function CreateEditTradeJournal() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-2">
                 <GlobalInput
                   inputType="number"
                   placeholder="Entry Price"
@@ -414,9 +455,6 @@ function CreateEditTradeJournal() {
                   onChangeHandler={(name, value) => handleChange(name, value)}
                   name="exitPrice"
                 />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
                 <GlobalInput
                   inputType="number"
                   placeholder="Target Price"
@@ -425,7 +463,9 @@ function CreateEditTradeJournal() {
                   onChangeHandler={(name, value) => handleChange(name, value)}
                   name="targetPrice"
                 />
+              </div>
 
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-2">
                 <GlobalInput
                   inputType="number"
                   placeholder="S/L Price"
@@ -434,9 +474,7 @@ function CreateEditTradeJournal() {
                   onChangeHandler={(name, value) => handleChange(name, value)}
                   name="slPrice"
                 />
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
                 <GlobalInput
                   inputType="number"
                   placeholder="Qty/Lot"
@@ -457,22 +495,24 @@ function CreateEditTradeJournal() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
-                <GlobalInput
-                  inputType="text"
+                <GlobalTextArea
+                  row="4"
+                  label=""
                   placeholder="Emotions When Enter"
                   isValue={formData?.emotionsWhenEnter}
                   errors={errors?.emotionsWhenEnter}
-                  onChangeHandler={(name, value) => handleChange(name, value)}
                   name="emotionsWhenEnter"
+                  onChangeHandler={(name, value) => handleChange(name, value)}
                 />
 
-                <GlobalInput
-                  inputType="text"
+                <GlobalTextArea
+                  row="4"
+                  label=""
                   placeholder="Emotions When Exit"
                   isValue={formData?.emotionsWhenExit}
                   errors={errors?.emotionsWhenExit}
-                  onChangeHandler={(name, value) => handleChange(name, value)}
                   name="emotionsWhenExit"
+                  onChangeHandler={(name, value) => handleChange(name, value)}
                 />
               </div>
 
@@ -509,7 +549,7 @@ function CreateEditTradeJournal() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-5">
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-8">
                 <GlobalButton
                   btnTitle={isEditMode ? "Update Trade" : "Create New Trade"}
                   disabled={isDisable}
@@ -543,7 +583,6 @@ function CreateEditTradeJournal() {
         />
       )}
 
-  
       <FloatButton
         onClickHandler={onFloatBtnClickHandler}
         icon={<LIST_FLOAT_SVG />}

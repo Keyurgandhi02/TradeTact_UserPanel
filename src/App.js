@@ -4,6 +4,7 @@ import AuthenticatedLayout from "./components/AuthenticatedLayout";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import {
   BROKER_ROUTES,
+  CONTACT_US_ROUTES,
   GENERAL_ROUTES,
   MARKET_ROUTES,
   RISK_MANAGE_ROUTES,
@@ -23,6 +24,7 @@ import {
   ResetPasswordPage,
   RegisterPage,
   RiskManagementCalculatorPage,
+  ContactPage,
 } from "./pages/index";
 import { WatchlistPage, CreateEditWatchlistPage } from "./pages/watchlist";
 import {
@@ -125,6 +127,11 @@ function App() {
               <Route
                 path={USER_PROFILE_ROUTES.PROFILE}
                 element={<ProfilePage />}
+              />
+              {/* Contact Us Routes */}
+              <Route
+                path={CONTACT_US_ROUTES.CONTACT}
+                element={<ContactPage />}
               />
 
               {/* Broker Routes */}

@@ -64,7 +64,9 @@ export const tradeJournalValidationRules = {
   rating: {
     required: true,
     type: "number",
-    message: "Rating is required",
+    message: "Rating must be within 0 to 5",
+    min: 0,
+    max: 5,
   },
   learning: {
     required: false,
@@ -180,5 +182,21 @@ export const resetPasswordValidationRules = {
     required: true,
     message: "Please enter a valid email address.",
     type: "email",
+  },
+};
+
+export const contactValidationRules = {
+  name: {
+    required: true,
+    message: "Name is required.",
+  },
+  email: {
+    required: true,
+    message: "Please enter a valid email address.",
+    type: "email",
+  },
+  message: {
+    required: false,
+    message: "Message is required",
   },
 };

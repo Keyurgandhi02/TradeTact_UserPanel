@@ -4,7 +4,7 @@ import { getFirebaseData } from "../config/firestoreOperations";
 import { FIREBASE_ENDPOINTS } from "../constants/apiConstants";
 import { useAuth } from "../context/AuthContext";
 import { useLoading } from "../context/LoadingContext";
-import { formatNumber, renderActiveShape } from "../config/helper";
+import { formatNumber } from "../config/helper";
 import LongCard from "../components/LongCard";
 import LongCardItem from "../components/LongCardItem";
 import CardTitle from "../components/CardTitle";
@@ -18,30 +18,32 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
-  PieChart,
-  Pie,
-  Cell,
   XAxis,
+  RadialBarChart,
+  RadialBar,
+  BarChart,
+  Bar,
+  ReferenceLine,
 } from "recharts";
+import dayjs from "dayjs";
 
 // Donut chart colors
 const COLORS = [
-  "#e60049",
-  "#0bb4ff",
-  "#50e991",
-  "#e6d800",
-  "#9b19f5",
-  "#ffa300",
-  "#dc0ab4",
-  "#b3d4ff",
-  "#00bfa0",
+  "#ea5545",
+  "#f46a9b",
+  "#ef9b20",
+  "#edbf33",
+  "#ede15b",
+  "#bdcf32",
+  "#87bc45",
+  "#27aeef",
+  "#b33dc6",
 ];
-
 function AnalyticsPage() {
   const { currentUser } = useAuth();
   const { startLoading, stopLoading } = useLoading();
   const [fetchedData, setFetchedData] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [pastWeekData, setPastWeekData] = useState([]);
 
   // Fetch Trade Data
   const fetchData = useCallback(async () => {
@@ -55,10 +57,36 @@ function AnalyticsPage() {
       "buyDate"
     );
 
+    // Get today's date
+    const today = dayjs();
+
+    // Filter data for the past 7 days
+    const past7DaysData = Array.from({ length: 7 }).map((_, index) => {
+      const date = today.subtract(index, "day").format("YYYY-MM-DD");
+
+      // Filter trades for this specific date
+      const dailyTrades = fetchedData.filter((trade) => trade.buyDate === date);
+
+      // Calculate total profit/loss for the day
+      const totalProfitLoss = dailyTrades.reduce(
+        (acc, trade) => acc + parseFloat(trade.profitLossPrice),
+        0
+      );
+
+      return {
+        date,
+        totalProfitLoss,
+        trades: dailyTrades.length,
+      };
+    });
+
+    setPastWeekData(past7DaysData.reverse());
+
     setFetchedData(fetchedTasks);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser.uid]);
 
+  console.log("pastWeekData", pastWeekData);
   // Compute Trade Data
   const computedData = useMemo(() => {
     const userTrades = {};
@@ -142,7 +170,7 @@ function AnalyticsPage() {
     });
 
     const userCounts = Object.keys(userTrades).map((user) => ({
-      label: user,
+      name: user,
       count: Object.values(userTrades[user]).reduce((a, b) => a + b, 0),
     }));
 
@@ -203,17 +231,81 @@ function AnalyticsPage() {
         .filter(Boolean)
   );
 
-  // Pie Enter Show Design
-  const onPieEnter = (_, index) => {
-    setActiveIndex(index);
-  };
-
   return (
     <>
       {fetchedData.length > 0 && (
         <>
           <div className="mt-1 px-3 grid grid-cols-1 gap-2 md:grid-cols-12 md:mt-6 2xl:mt-7.5 2xl:gap-4.5">
             <div className="col-span-12 md:col-span-8 rounded-sm border-[0.6px] border-gray-500 bg-transparent px-3 py-5 shadow-default sm:px-5.5">
+              <CardTitle title="Trade Weekly Analysis" />
+              <ResponsiveContainer width="100%" height={400}>
+                <BarChart
+                  data={pastWeekData}
+                  className="text-black-dark-400 dark:text-white font-bold"
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <XAxis
+                    dataKey="date"
+                    tick={{ fill: "#00c805" }}
+                    tickFormatter={(date) => format(new Date(date), "dd/MM/yy")}
+                  />
+
+                  <ReferenceLine y={0} stroke="#333A48" />
+                  <Bar
+                    dataKey="totalProfitLoss"
+                    fill="#ffc657"
+                    radius={3}
+                    className="text-black-dark-400 dark:text-white font-bold"
+                    label={{ position: "insideBottom", fill: "" }}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="col-span-12 md:col-span-4 rounded-sm border-[0.6px] border-gray-500 bg-transparent px-3 py-5 shadow-default sm:px-5.5">
+              <CardTitle title="Trade User Analysis" />
+              <div className="border-b mb-5 dark:border-black-dark-300 border-gray-500"></div>
+              <ResponsiveContainer width="100%" height={400}>
+                <RadialBarChart
+                  cx="50%"
+                  cy="50%"
+                  innerRadius="20%"
+                  outerRadius="100%"
+                  barSize={24}
+                  data={computedData.userCounts}
+                >
+                  <RadialBar
+                    minAngle={15}
+                    label={{ position: "insideStart", fill: "#F1F5F9" }}
+                    background
+                    clockWise
+                    dataKey="count"
+                    fill="#00c805"
+                  />
+                  <Legend
+                    iconType="circle"
+                    iconSize={12}
+                    verticalAlign="bottom"
+                    layout="horizontal"
+                    align="center"
+                    wrapperStyle={{
+                      lineHeight: "24px",
+                      color: "#00c805",
+                      fill: "#00c805",
+                      fontWeight: "500",
+                    }}
+                  />
+                </RadialBarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          <div className="mt-1 px-3 grid grid-cols-1 gap-2 md:grid-cols-12 md:mt-6 2xl:mt-7.5 2xl:gap-4.5">
+            <div className="col-span-12 md:col-span-12 rounded-sm border-[0.6px] border-gray-500 bg-transparent px-3 py-5 shadow-default sm:px-5.5">
               <CardTitle title="Trade Analysis" />
               <ResponsiveContainer width="100%" height={400}>
                 <AreaChart data={computedData.chartData}>
@@ -221,7 +313,7 @@ function AnalyticsPage() {
                   <XAxis
                     dataKey="date"
                     tickFormatter={(date) => format(new Date(date), "dd/MM/yy")}
-                    tick={{ fill: "#06d6a0" }}
+                    tick={{ fill: "#00c805" }}
                     dy={10}
                   />
                   <Legend
@@ -243,35 +335,6 @@ function AnalyticsPage() {
                       />
                     ))}
                 </AreaChart>
-              </ResponsiveContainer>
-            </div>
-
-            <div className="col-span-12 md:col-span-4 rounded-sm border-[0.6px] border-gray-500 bg-transparent px-3 py-5 shadow-default sm:px-5.5">
-              <CardTitle title="Trade User Analysis" />
-              <div className="border-b mb-5 dark:border-black-dark-300 border-gray-500"></div>
-              <ResponsiveContainer width="100%" height={400}>
-                <PieChart>
-                  <Pie
-                    activeIndex={activeIndex}
-                    activeShape={renderActiveShape}
-                    data={computedData.userCounts}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="count"
-                    nameKey="label"
-                    onMouseEnter={onPieEnter}
-                  >
-                    {computedData.userCounts.map((_, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                </PieChart>
               </ResponsiveContainer>
             </div>
           </div>
@@ -313,10 +376,7 @@ function AnalyticsPage() {
                             (item?.lossCount / item?.totalItems) * 100
                           ).toFixed(0)}%`}
                         />
-                        <LongCardItem
-                          heading={TRADE_ANALYSIS_DETAILS_COLUMNS[6]}
-                          value={item?.totalProfitLoss}
-                        />
+
                         <LongCardItem
                           heading={TRADE_ANALYSIS_DETAILS_COLUMNS[7]}
                           value={item?.totalBought}
@@ -324,6 +384,11 @@ function AnalyticsPage() {
                         <LongCardItem
                           heading={TRADE_ANALYSIS_DETAILS_COLUMNS[8]}
                           value={item?.totalSold}
+                        />
+                        <LongCardItem
+                          heading={TRADE_ANALYSIS_DETAILS_COLUMNS[6]}
+                          dvalue={item?.totalProfitLoss}
+                          isAmount={true}
                         />
                       </>
                     }
@@ -374,10 +439,7 @@ function AnalyticsPage() {
                             (item?.lossCount / item?.totalItems) * 100
                           ).toFixed(0)}%`}
                         />
-                        <LongCardItem
-                          heading={TRADE_ANALYSIS_USER_COLUMNS[7]}
-                          value={item?.totalProfitLoss}
-                        />
+
                         <LongCardItem
                           heading={TRADE_ANALYSIS_USER_COLUMNS[8]}
                           value={item?.totalBought}
@@ -385,6 +447,11 @@ function AnalyticsPage() {
                         <LongCardItem
                           heading={TRADE_ANALYSIS_USER_COLUMNS[9]}
                           value={item?.totalSold}
+                        />
+                        <LongCardItem
+                          heading={TRADE_ANALYSIS_USER_COLUMNS[7]}
+                          dvalue={item?.totalProfitLoss}
+                          isAmount={true}
                         />
                       </>
                     }

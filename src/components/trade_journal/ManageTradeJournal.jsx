@@ -191,7 +191,6 @@ function ManageTradeJournal() {
               />
             ))}
           </div>
-      
         </>
       ) : (
         <NoRecordFound
@@ -212,6 +211,16 @@ function ManageTradeJournal() {
             <div className="grid p-3 mb-2 ">
               <DataCardItem title="RATING" data={isModalData?.rating} />
             </div>
+
+            {isModalData?.trade_time_interval && (
+              <div className="grid p-3 mb-2 ">
+                <DataCardItem
+                  title="TIME INTERVAL"
+                  data={isModalData?.trade_time_interval}
+                />
+              </div>
+            )}
+
             <div className="grid p-3 mb-2 ">
               <DataCardItem
                 title="EMOTIONS WHEN ENTER"

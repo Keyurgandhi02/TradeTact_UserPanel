@@ -72,6 +72,16 @@ export const validateAllFields = (formData, validationRules) => {
         rules.message || `${field} must be a valid email address.`;
       continue;
     }
+
+    // Check if the number is within a specified range (e.g., 0-5)
+    if (rules.min !== undefined && rules.max !== undefined) {
+      if (value < rules.min || value > rules.max) {
+        errors[field] =
+          rules.message ||
+          `${field} must be between ${rules.min} and ${rules.max}.`;
+        continue;
+      }
+    }
   }
 
   return errors;
