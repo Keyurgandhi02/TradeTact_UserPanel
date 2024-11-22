@@ -61,6 +61,8 @@ function ProfilePage() {
     }
   };
 
+  console.log("subscriptionData", subscriptionData);
+  console.log("planStatus", planStatus);
   return (
     <>
       <UserProfile
@@ -127,7 +129,7 @@ function ProfilePage() {
                 Membership is {planStatus}!
               </h2>
 
-              {!planStatus === "free" && (
+              {planStatus === "active" && (
                 <>
                   <div className="flex flex-row justify-between items-center mt-10">
                     <Grid
