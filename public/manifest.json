@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "short_name": "TradeTact",
   "name": "TradeTact",
+=======
+  "short_name": "React App",
+  "name": "Create React App Sample",
+>>>>>>> 3d302c46b806ec3eac909a303f3f29e521fe8c21
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +13,20 @@
       "type": "image/x-icon"
     },
     {
+<<<<<<< HEAD
       "src": "logo192.svg",
+=======
+      "src": "logo192.png",
+>>>>>>> 3d302c46b806ec3eac909a303f3f29e521fe8c21
       "type": "image/png",
       "sizes": "192x192"
     },
     {
+<<<<<<< HEAD
       "src": "logo192.svg",
+=======
+      "src": "logo512.png",
+>>>>>>> 3d302c46b806ec3eac909a303f3f29e521fe8c21
       "type": "image/png",
       "sizes": "512x512"
     }

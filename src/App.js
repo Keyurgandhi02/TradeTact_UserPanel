@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthenticatedLayout from "./components/AuthenticatedLayout";
@@ -187,6 +188,16 @@ function App() {
         </Route>
       </Routes>
     </Suspense>
+=======
+import "./App.css";
+import UpdateForm from "./components/UpdateForm";
+
+function App() {
+  return (
+    <div>
+      <UpdateForm />
+    </div>
+>>>>>>> 3d302c46b806ec3eac909a303f3f29e521fe8c21
   );
 }
 

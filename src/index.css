@@ -19,6 +19,7 @@
 body {
   @apply font-custom;
 }
+<<<<<<< HEAD
 @layer base {
   /* Remove the spin buttons in Chrome, Safari, and Edge */
   input[type="number"]::-webkit-inner-spin-button,
@@ -82,3 +83,5 @@ body {
     @apply sm:pb-24 pb-12;
   }
 }
+=======
+>>>>>>> 3d302c46b806ec3eac909a303f3f29e521fe8c21
