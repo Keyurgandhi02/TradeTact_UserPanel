@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+# 📊 TradeTact — Trading Analytics & Journal Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+TradeTact is a full-stack trading analytics platform built with a **React Native mobile app** and an **Admin Panel (Web)** to help traders track, analyze, and improve their trading performance.
 
-## Available Scripts
+Designed for **serious traders who want data-driven decisions instead of emotional trading**.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+TradeTact allows traders to:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Log and track trades in real-time  
+- Analyze profit/loss performance  
+- Identify patterns and mistakes  
+- Improve discipline and decision-making  
 
-### `npm test`
+Additionally, the **Admin Panel** enables monitoring users, managing data, and maintaining the platform efficiently.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## ✨ Key Highlights
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 📱 Mobile-first trading journal (React Native)  
+- 🧠 Performance analytics & insights  
+- 📊 P&L tracking with detailed breakdown  
+- 🖥 Admin panel for full system control  
+- 🔐 Secure authentication & data handling  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📱 Mobile App Features
 
-### `npm run eject`
+- Add & manage trades  
+- Track profit/loss (P&L)  
+- Trade history & filtering  
+- Performance analytics (win rate, risk-reward, etc.)  
+- Clean and intuitive UI for fast usage  
+- User authentication  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🖥 Admin Panel Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Dashboard overview of users & activity  
+- User management (add/remove/control users)  
+- Trade data monitoring  
+- Analytics & reporting  
+- System management & control  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🧠 Problem It Solves
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Most traders fail not because of strategy —  
+but because they **don’t track their behavior**.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+TradeTact helps:
+- Remove emotional trading  
+- Improve discipline  
+- Make data-driven decisions  
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🛠 Tech Stack
 
-### Analyzing the Bundle Size
+### 📱 Mobile (Frontend)
+- React Native
+- Expo
+- JavaScript
+- State Management (Redux & Context API)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 🖥 Admin Panel
+- React.js
 
-### Making a Progressive Web App
+### ⚙️ Backend
+- Node.js & Firebase
+- REST APIs
+- Database (Firestore & MongoDB)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## ⚙️ Installation
 
-### Advanced Configuration
+### 📱 Mobile App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+git clone https://github.com/yourusername/tradetact.git
+cd tradetact
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+npm install
+npm start
